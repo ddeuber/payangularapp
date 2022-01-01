@@ -4,16 +4,18 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HTTP_INTERCEPTORS
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from './services/auth-service.service';
 import { Router } from '@angular/router';
 
-const TOKEN_HEADER_KEY = 'Authorization'; // for JWT
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthInterceptor implements HttpInterceptor {
+
   constructor(private authService: AuthService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,14 +28,22 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     let authReq = req;
-    const token = localStorage.get("access_token");
+    const token = this.authService.getAccessToken();
     if (token != null) {
-      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+      authReq = req.clone({ headers: req.headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
-    return next.handle(authReq);
+
+    return next.handle(authReq).pipe(
+      catchError(error => this.goToLoginIfNotAuthenticated(error))
+    );
+  }
+
+  private goToLoginIfNotAuthenticated(error: HttpErrorResponse): Observable<HttpEvent<unknown>> {
+    if (error.status == 401) {
+      this.router.navigate(['login']);
+    } else {
+      alert("Something went wrong. Maybe try again.");
+    }
+    return throwError(error.message);
   }
 }
-
-export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-];

@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { TokenService } from './token.service';
 
 interface JwtTokens {
   access_token: string;
@@ -14,6 +15,7 @@ interface AccessToken {
   access_token: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +24,12 @@ export class AuthService {
   private static readonly ACCESS_TOKEN_VALID_MINUTES = 5;
   private static readonly REFRESH_TOKEN_VALID_DAYS = 29;
 
+  static readonly TOKEN_HEADER_KEY = 'Authorization'; // for JWT
+
   private http: HttpClient;
 
-  constructor(private httpBackend: HttpBackend) {
-    // We use the client from the backend in order to bypass the auth interceptor.
+  constructor(private httpBackend: HttpBackend, private tokenService: TokenService) {
+    // We use the client from the backend in order to bypass the AuthInterceptor.
     this.http = new HttpClient(httpBackend);
   }
 
@@ -40,21 +44,18 @@ export class AuthService {
     const accessTokenExpiresAt = moment().add(AuthService.ACCESS_TOKEN_VALID_MINUTES, 'minute');
     const refreshTokenExpiresAt = moment().add(AuthService.REFRESH_TOKEN_VALID_DAYS, 'day');
 
-    localStorage.setItem('refresh_token', tokens.refresh_token);
-    localStorage.setItem('refresh_token_expiration', refreshTokenExpiresAt.toString())
-    localStorage.setItem('access_token', tokens.access_token);
-    localStorage.setItem('access_token_expiration', accessTokenExpiresAt.toString())
+    this.tokenService.setAccessToken(tokens.access_token);
+    this.tokenService.setRefreshToken(tokens.refresh_token);
+    this.tokenService.setAccessTokenExpiration(accessTokenExpiresAt);
+    this.tokenService.setRefreshTokenExpiration(refreshTokenExpiresAt);
   }
 
   logout(): void {
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('refresh_token_expiration');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('access_token_expiration');
+    this.tokenService.clearTokens();
   }
 
   isLoggedIn(): boolean {
-    const accessTokenExpiration = this.getAccessTokenExpiration();
+    const accessTokenExpiration = this.tokenService.getAccessTokenExpiration();
     if (!accessTokenExpiration) {
       return false;
     }
@@ -66,25 +67,12 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
-  private getAccessTokenExpiration(): moment.Moment | null {
-    return this.getTokenExpiration('access_token_expiration');
-  }
-
-  private getRefreshTokenExpiration(): moment.Moment | null {
-    return this.getTokenExpiration('refresh_token_expiration');
-  }
-
-  private getTokenExpiration(expirationKey: string): moment.Moment | null {
-    const expiration = localStorage.getItem(expirationKey);
-    if (!expiration) {
-      return null;
-    }
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+  getAccessToken(): string | null {
+    return this.tokenService.getAccessToken();
   }
 
   isRefreshPossible(): boolean {
-    const refreshTokenExpiration = this.getRefreshTokenExpiration();
+    const refreshTokenExpiration = this.tokenService.getRefreshTokenExpiration();
     if (!refreshTokenExpiration) {
       return false;
     }
@@ -93,16 +81,19 @@ export class AuthService {
   }
 
   refresh(): Observable<AccessToken> {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers.set('Authorization', 'Bearer ' + localStorage.getItem('refresh_token'));
-    let refreshToken: string = localStorage.getItem('refresh_token')!;
+    let headers = new HttpHeaders();
+    let refreshToken = this.tokenService.getRefreshToken();
+    if (refreshToken == null) {
+      throw new Error('No refresh token found for refresh.');
+    }
+    headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + refreshToken);
 
     return this.http.post<AccessToken>(environment.baseUrl + '/refresh', headers)
       .pipe(
         tap((token: AccessToken) => {
           const jwtTokens: JwtTokens = {
             'access_token': token.access_token,
-            'refresh_token': refreshToken
+            'refresh_token': refreshToken!
           }
           this.setSession(jwtTokens);
         })

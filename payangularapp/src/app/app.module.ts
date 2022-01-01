@@ -10,15 +10,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatCardModule } from '@angular/material/card'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GroupListComponent } from './components/group-list/group-list.component';
+import { GroupItemComponent } from './components/group-item/group-item.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { GroupCreationDialogComponent } from './components/group-creation-dialog/group-creation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    GroupListComponent,
+    GroupItemComponent,
+    GroupCreationDialogComponent,
   ],
   imports: [
     FormsModule,
@@ -31,11 +41,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
