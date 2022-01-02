@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { AuthService } from './services/auth-service.service';
 import { Router } from '@angular/router';
 
@@ -21,12 +21,19 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.authService.isLoggedOut()) {
       if (this.authService.isRefreshPossible()) {
-        this.authService.refresh().subscribe();
+        return this.authService.refresh().pipe(
+          // the request is executed after the refresh
+          mergeMap(() => this.addAuthenticationHeader(req, next))
+          );
       } else {
         this.router.navigate(['login']);
       }
     }
 
+    return this.addAuthenticationHeader(req, next);
+  }
+
+  private addAuthenticationHeader(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq = req;
     const token = this.authService.getAccessToken();
     if (token != null) {

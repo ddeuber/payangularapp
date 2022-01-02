@@ -81,14 +81,15 @@ export class AuthService {
   }
 
   refresh(): Observable<AccessToken> {
-    let headers = new HttpHeaders();
     let refreshToken = this.tokenService.getRefreshToken();
     if (refreshToken == null) {
       throw new Error('No refresh token found for refresh.');
     }
-    headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + refreshToken);
 
-    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', headers)
+    let headers = new HttpHeaders();
+    headers = headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + refreshToken);
+
+    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', {}, {headers: headers})
       .pipe(
         tap((token: AccessToken) => {
           const jwtTokens: JwtTokens = {

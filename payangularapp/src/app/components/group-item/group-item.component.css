@@ -1,7 +1,4 @@
 .item-with-border {
-  border: solid 1px rgb(181, 181, 181);
   width: 90vw;
   max-width: 600px;
-  margin-top: -1px;
-  margin-bottom: -1px;
 }

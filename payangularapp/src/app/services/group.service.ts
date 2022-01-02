@@ -22,7 +22,6 @@ interface GroupId {
 })
 export class GroupService {
   groupsOfUser: Group[] = [];
-  currentGroup: Group | undefined;
 
   constructor(private http: HttpClient) {
   }
@@ -39,5 +38,13 @@ export class GroupService {
       map((id: GroupId) => { return { 'id': id.id, 'name': groupName }; }),
       tap((group: Group) => this.groupsOfUser.push(group))
     );
+  }
+
+  leaveGroup(group: Group): Observable<unknown> {
+    return this.http.post<unknown>(environment.baseUrl + '/leavegroup/' + group.id, {});
+  }
+
+  getGroupById(id: number): Group | undefined {
+    return this.groupsOfUser.find(g => g.id == id);
   }
 }

@@ -1,0 +1,5 @@
+<h2>{{group?.name}}</h2>
+
+<app-balance-table *ngIf="balances" [balances]="balances"></app-balance-table>
+
+<button mat-raised-button color="primary" (click)="onLeaveGoup()">Leave Group</button>

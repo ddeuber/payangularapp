@@ -1,0 +1,21 @@
+<table mat-table [dataSource]="balances" class="mat-elevation-z8">
+  <ng-container matColumnDef="participant">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let balance">{{balance.participant}}</td>
+  </ng-container>
+  <ng-container matColumnDef="spent">
+    <th mat-header-cell *matHeaderCellDef>Spent</th>
+    <td mat-cell *matCellDef="let balance">{{balance.spent | number: '1.2-2'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="owes">
+    <th mat-header-cell *matHeaderCellDef>Owes</th>
+    <td mat-cell *matCellDef="let balance">{{balance.owes | number: '1.2-2'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="credit">
+    <th mat-header-cell *matHeaderCellDef>Credit</th>
+    <td mat-cell *matCellDef="let balance" [style.color]="balance.credit > 0 ? 'green' : 'red'">{{balance.credit | number: '1.2-2'}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

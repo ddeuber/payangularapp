@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +21,8 @@ import { GroupListComponent } from './components/group-list/group-list.component
 import { GroupItemComponent } from './components/group-item/group-item.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { GroupCreationDialogComponent } from './components/group-creation-dialog/group-creation-dialog.component';
+import { GroupOverviewComponent } from './components/group-overview/group-overview.component';
+import { BalanceTableComponent } from './components/balance-table/balance-table.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { GroupCreationDialogComponent } from './components/group-creation-dialog
     GroupListComponent,
     GroupItemComponent,
     GroupCreationDialogComponent,
+    GroupOverviewComponent,
+    BalanceTableComponent,
   ],
   imports: [
     FormsModule,
@@ -44,6 +48,7 @@ import { GroupCreationDialogComponent } from './components/group-creation-dialog
     MatListModule,
     MatCardModule,
     MatDialogModule,
+    MatTableModule,
     MatButtonModule,
     HttpClientModule
   ],
