@@ -1,0 +1,21 @@
+<table mat-table [dataSource]="standingOrders" class="mat-elevation-z3">
+  <ng-container matColumnDef="payer">
+    <th mat-header-cell *matHeaderCellDef>Payer</th>
+    <td mat-cell *matCellDef="let standingOrder">{{standingOrder.payer}}</td>
+  </ng-container>
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef>Amount</th>
+    <td mat-cell *matCellDef="let standingOrder">{{standingOrder.amount | number: '1.2-2'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let standingOrder">{{standingOrder.comment}}</td>
+  </ng-container>
+  <ng-container matColumnDef="nextExecution">
+    <th mat-header-cell *matHeaderCellDef>Next Execution</th>
+    <td mat-cell *matCellDef="let standingOrder">{{standingOrder.next_executions[0] | date: 'dd.MM.yyyy': 'UTC+1'}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

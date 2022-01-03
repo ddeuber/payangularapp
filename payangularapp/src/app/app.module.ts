@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
@@ -23,6 +24,11 @@ import { AuthInterceptor } from './auth.interceptor';
 import { GroupCreationDialogComponent } from './components/group-creation-dialog/group-creation-dialog.component';
 import { GroupOverviewComponent } from './components/group-overview/group-overview.component';
 import { BalanceTableComponent } from './components/balance-table/balance-table.component';
+import { StandingOrderTableComponent } from './components/standing-order-table/standing-order-table.component';
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { BalanceTableComponent } from './components/balance-table/balance-table.
     GroupCreationDialogComponent,
     GroupOverviewComponent,
     BalanceTableComponent,
+    StandingOrderTableComponent,
   ],
   imports: [
     FormsModule,
@@ -49,11 +56,12 @@ import { BalanceTableComponent } from './components/balance-table/balance-table.
     MatCardModule,
     MatDialogModule,
     MatTableModule,
+    MatTabsModule,
     MatButtonModule,
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

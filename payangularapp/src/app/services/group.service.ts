@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -21,7 +21,7 @@ interface GroupId {
   providedIn: 'root'
 })
 export class GroupService {
-  groupsOfUser: Group[] = [];
+  groupsOfUser: Group[] | undefined;
 
   constructor(private http: HttpClient) {
   }
@@ -36,7 +36,7 @@ export class GroupService {
   addGroup(groupName: string): Observable<Group> {
     return this.http.post<GroupId>(environment.baseUrl + '/addgroup', { 'name': groupName }).pipe(
       map((id: GroupId) => { return { 'id': id.id, 'name': groupName }; }),
-      tap((group: Group) => this.groupsOfUser.push(group))
+      tap((group: Group) => this.groupsOfUser?.push(group))
     );
   }
 
@@ -44,7 +44,13 @@ export class GroupService {
     return this.http.post<unknown>(environment.baseUrl + '/leavegroup/' + group.id, {});
   }
 
-  getGroupById(id: number): Group | undefined {
-    return this.groupsOfUser.find(g => g.id == id);
+  getGroupById(id: number): Observable<Group | undefined> {
+    if (this.groupsOfUser) {
+      return of(this.groupsOfUser.find(g => g.id == id));
+    } else {
+      return this.loadGroups().pipe(
+        map((groups: Group[]) => groups.find(g => g.id == id))
+      )
+    }
   }
 }

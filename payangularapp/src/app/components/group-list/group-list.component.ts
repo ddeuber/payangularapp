@@ -10,7 +10,7 @@ import { GroupCreationDialogComponent } from '../group-creation-dialog/group-cre
   styleUrls: ['./group-list.component.css']
 })
 export class GroupListComponent implements OnInit {
-  groups: Group[] = [];
+  groups: Group[] | undefined;
 
   constructor(private groupService: GroupService, private dialog: MatDialog, private router: Router) { }
 

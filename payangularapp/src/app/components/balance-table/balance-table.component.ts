@@ -9,7 +9,6 @@ import { Group } from 'src/app/services/group.service';
 })
 export class BalanceTableComponent implements OnInit {
   displayedColumns: string[] = ['participant', 'spent', 'owes', 'credit'];
-
   @Input() balances!: Balance[];
 
   constructor() { }

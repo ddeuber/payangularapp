@@ -3,17 +3,7 @@ table {
   width: 600px;
 }
 
-.mat-column-spent {
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.mat-column-owes {
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.mat-column-credit{
+.mat-column-amount {
   text-align: right;
   justify-content: flex-end;
 }
@@ -27,6 +17,5 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 }
 
 .mat-cell, .mat-header-cell {
-  padding: 15px 16px 15px 0;
+  padding: 20px 16px 20px 0;
 }
-

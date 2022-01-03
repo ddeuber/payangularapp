@@ -1,5 +1,9 @@
-<h2>{{group?.name}}</h2>
+<div style="display: flex">
+  <h2>{{group?.name}}</h2>
+  <mat-icon (click)="onLeaveGoup()">delete</mat-icon>
+</div>
 
 <app-balance-table *ngIf="balances" [balances]="balances"></app-balance-table>
 
-<button mat-raised-button color="primary" (click)="onLeaveGoup()">Leave Group</button>
+<h4>Standing Orders</h4>
+<app-standing-order-table *ngIf="standingOrders" [standingOrders]="standingOrders"></app-standing-order-table>
