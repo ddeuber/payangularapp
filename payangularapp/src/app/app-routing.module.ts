@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GroupListComponent } from './components/group-list/group-list.component';
-import { GroupOverviewComponent } from './components/group-overview/group-overview.component';
-import { LoginComponent } from './components/login/login.component';
+import { GroupListContainerComponent } from './components/group-list-container/group-list-container.component';
+import { GroupOverviewContainerComponent } from './components/group-overview-container/group-overview-container.component';
+import { LoginContainerComponent } from './components/login-container/login-container.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'groups/:id', component: GroupOverviewComponent},
-  { path: 'groups', component: GroupListComponent},
+  { path: 'login', component: LoginContainerComponent},
+  { path: 'groups/:id', component: GroupOverviewContainerComponent},
+  { path: 'groups', component: GroupListContainerComponent},
   { path: '', redirectTo: 'groups', pathMatch: 'full'}
 ];
 

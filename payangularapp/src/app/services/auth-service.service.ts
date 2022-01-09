@@ -15,6 +15,10 @@ interface AccessToken {
   access_token: string;
 }
 
+export interface Credentials {
+  email: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +37,8 @@ export class AuthService {
     this.http = new HttpClient(httpBackend);
   }
 
-  login(email: string, password: string): Observable<JwtTokens> {
-    return this.http.post<JwtTokens>(environment.baseUrl + '/login', { email, password })
+  login(credentials: Credentials): Observable<JwtTokens> {
+    return this.http.post<JwtTokens>(environment.baseUrl + '/login', { 'email': credentials.email, 'password': credentials.password })
       .pipe(
         tap((tokens: JwtTokens) => this.setSession(tokens))
       );
@@ -89,7 +93,7 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + refreshToken);
 
-    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', {}, {headers: headers})
+    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', {}, { headers: headers })
       .pipe(
         tap((token: AccessToken) => {
           const jwtTokens: JwtTokens = {

@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +27,10 @@ import { BalanceTableComponent } from './components/balance-table/balance-table.
 import { StandingOrderTableComponent } from './components/standing-order-table/standing-order-table.component';
 import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
+import { GroupOverviewContainerComponent } from './components/group-overview-container/group-overview-container.component';
+import { GroupListContainerComponent } from './components/group-list-container/group-list-container.component';
+import { LoginContainerComponent } from './components/login-container/login-container.component';
+import { StandingOrderTableContainerComponent } from './components/standing-order-table-container/standing-order-table-container.component';
 
 registerLocaleData(localeDe);
 
@@ -40,6 +44,10 @@ registerLocaleData(localeDe);
     GroupOverviewComponent,
     BalanceTableComponent,
     StandingOrderTableComponent,
+    GroupOverviewContainerComponent,
+    GroupListContainerComponent,
+    LoginContainerComponent,
+    StandingOrderTableContainerComponent,
   ],
   imports: [
     FormsModule,

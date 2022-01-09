@@ -15,4 +15,8 @@ export class BalanceTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  onClick(balance: Balance): void {
+    alert(JSON.stringify(balance));
+  }
 }

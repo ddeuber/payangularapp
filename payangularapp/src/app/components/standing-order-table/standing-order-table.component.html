@@ -1,4 +1,6 @@
-<table mat-table [dataSource]="standingOrders" class="mat-elevation-z3">
+<h4>Standing Orders</h4>
+
+<table mat-table [dataSource]="standingOrders">
   <ng-container matColumnDef="payer">
     <th mat-header-cell *matHeaderCellDef>Payer</th>
     <td mat-cell *matCellDef="let standingOrder">{{standingOrder.payer}}</td>

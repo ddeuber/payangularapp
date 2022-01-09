@@ -6,6 +6,12 @@ table {
 .mat-column-amount {
   text-align: right;
   justify-content: flex-end;
+  padding: 15px 5vw 15px 0;
+}
+
+
+.mat-column-title {
+  padding: 15px 2vw 15px 0;
 }
 
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
@@ -16,6 +22,12 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
   padding-right: 10px;
 }
 
-.mat-cell, .mat-header-cell {
-  padding: 20px 16px 20px 0;
+.mat-row:hover {
+  background-color: rgb(220, 220, 220);
+  cursor: pointer;
 }
+
+.mat-header-row {
+  background-color: rgb(220, 220, 220);
+}
+
