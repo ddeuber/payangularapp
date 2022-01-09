@@ -1,16 +1,16 @@
-  <table style="width: 100%;">
+  <table class="group-overview-header">
     <tr>
-      <td style="">
+      <td>
         <h2>{{group?.name}}</h2>
       </td>
       <td style="text-align: right">
-        <mat-icon style="margin-right: 10px">group_add</mat-icon>
-        <mat-icon>delete</mat-icon>
+        <mat-icon style="margin-right: 10px" (click)="onAddMember()">group_add</mat-icon>
+        <mat-icon (click)="onLeaveGroup()">delete</mat-icon>
       </td>
     </tr>
   </table>
 
 <app-balance-table *ngIf="balances" [balances]="balances"></app-balance-table>
 
-<app-standing-order-table-container [group]=group></app-standing-order-table-container>
+<app-standing-order-table-container [group]="group"></app-standing-order-table-container>
 

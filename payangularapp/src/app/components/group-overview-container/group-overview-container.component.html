@@ -1,3 +1,4 @@
 <ng-container *ngIf="balances$ | async as balances">
-  <app-group-overview [group]="group!" [balances]="balances"></app-group-overview>
+  <app-group-overview [group]="group!" [balances]="balances" (leaveGroup)="onLeaveGroup($event)"
+    (addMember)="onAddMember($event)"></app-group-overview>
 </ng-container>

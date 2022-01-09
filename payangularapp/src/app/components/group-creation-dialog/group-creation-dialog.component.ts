@@ -10,11 +10,7 @@ import { GroupListComponent } from '../group-list/group-list.component';
 export class GroupCreationDialogComponent {
   groupName = "";
 
-  constructor(private dialogRef: MatDialogRef<GroupListComponent>) {
+  constructor() {
 
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
   }
 }

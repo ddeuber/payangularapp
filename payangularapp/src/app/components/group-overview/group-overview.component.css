@@ -1,0 +1,7 @@
+.group-overview-header {
+  width: 100%;
+}
+
+mat-icon:hover {
+  cursor: pointer;
+}

@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +11,12 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +33,8 @@ import { GroupOverviewContainerComponent } from './components/group-overview-con
 import { GroupListContainerComponent } from './components/group-list-container/group-list-container.component';
 import { LoginContainerComponent } from './components/login-container/login-container.component';
 import { StandingOrderTableContainerComponent } from './components/standing-order-table-container/standing-order-table-container.component';
+import { LeaveGroupDialogComponent } from './components/leave-group-dialog/leave-group-dialog.component';
+import { AddMemberDialogComponent } from './components/add-member-dialog/add-member-dialog.component';
 
 registerLocaleData(localeDe);
 
@@ -48,6 +52,8 @@ registerLocaleData(localeDe);
     GroupListContainerComponent,
     LoginContainerComponent,
     StandingOrderTableContainerComponent,
+    LeaveGroupDialogComponent,
+    AddMemberDialogComponent,
   ],
   imports: [
     FormsModule,
@@ -65,6 +71,7 @@ registerLocaleData(localeDe);
     MatDialogModule,
     MatTableModule,
     MatTabsModule,
+    MatSnackBarModule,
     MatButtonModule,
     HttpClientModule
   ],

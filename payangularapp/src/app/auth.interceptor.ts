@@ -10,13 +10,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { AuthService } from './services/auth-service.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.authService.isLoggedOut()) {
@@ -48,9 +49,14 @@ export class AuthInterceptor implements HttpInterceptor {
   private goToLoginIfNotAuthenticated(error: HttpErrorResponse): Observable<HttpEvent<unknown>> {
     if (error.status == 401) {
       this.router.navigate(['login']);
+    } else if (error.status == 400) {
+      this.snackBar.open(error.error.message, undefined, {
+        duration: 3000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      })
     } else {
       alert("Something went wrong. Maybe try again.");
     }
-    return throwError(error.message);
+    return throwError(() => error);
   }
 }

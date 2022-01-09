@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
@@ -15,7 +16,7 @@ export class GroupOverviewContainerComponent {
   balances$: Observable<Balance[] | undefined>;
 
   constructor(private groupService: GroupService, private balanceService: BalanceService, private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute, private snackBar: MatSnackBar) {
 
     this.balances$ = this.activatedRoute.params.pipe(
       mergeMap(params => this.groupService.getGroupById(params['id'])),
@@ -24,7 +25,16 @@ export class GroupOverviewContainerComponent {
     );
   }
 
-  onLeaveGoup(group: Group): void {
+  onLeaveGroup(group: Group): void {
     this.groupService.leaveGroup(group).subscribe(res => this.router.navigate(['groups']));
+  }
+
+  onAddMember(memberEmail: string): void {
+    this.groupService.addNewMemberToGroup(memberEmail, this.group!).subscribe(
+      res => this.snackBar.open(`Successfully added member with email '${memberEmail}'.`, undefined, {
+        duration: 3000,
+        panelClass: ['mat-toolbar', 'mat-primary']
+      })
+    )
   }
 }

@@ -7,5 +7,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button [mat-dialog-close]="groupName" [disabled]="!groupName" cdkFocusInitial color="primary">Create</button>
-  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="">Cancel</button>
 </div>

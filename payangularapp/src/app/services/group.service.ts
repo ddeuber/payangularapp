@@ -53,4 +53,8 @@ export class GroupService {
       )
     }
   }
+
+  addNewMemberToGroup(memberEmail: string, group: Group) {
+    return this.http.post<unknown>(environment.baseUrl + '/addusertogroup/' + group.id, { email: memberEmail });
+  }
 }
