@@ -1,0 +1,22 @@
+<h3>Add Transaction</h3>
+
+<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+  <div>
+    <mat-form-field class="full-width-input">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="full-width-input">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" formControlName="amount">
+    </mat-form-field>
+  </div>
+
+
+  <div class="small-top-margin">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+  </div>
+</form>

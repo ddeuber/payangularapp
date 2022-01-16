@@ -39,4 +39,8 @@ export class GroupOverviewContainerComponent {
       })
     )
   }
+
+  onAddTransaction(group: Group): void{
+    this.router.navigate(['groups', group.id, 'addtransaction']);
+  }
 }

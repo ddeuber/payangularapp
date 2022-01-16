@@ -13,6 +13,10 @@ interface GroupId {
   id: number;
 }
 
+interface Participants {
+  participants: string[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,5 +56,11 @@ export class GroupService {
 
   addNewMemberToGroup(memberEmail: string, group: Group) {
     return this.http.post<unknown>(environment.baseUrl + '/addusertogroup/' + group.id, { email: memberEmail });
+  }
+
+  getParticipants(group: Group): Observable<string[]> {
+    return this.http.get<Participants>(environment.baseUrl + '/participants/' + group.id, {}).pipe(
+      map((participantList: Participants) => participantList.participants)
+    );
   }
 }

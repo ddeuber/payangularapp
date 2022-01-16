@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { GroupOverviewComponent } from '../group-overview/group-overview.component';
+import { Component, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Group } from 'src/app/model/group';
 

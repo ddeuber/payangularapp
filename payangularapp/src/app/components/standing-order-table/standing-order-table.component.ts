@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StandingOrder } from 'src/app/model/standingorder';
 
 @Component({
@@ -6,12 +6,9 @@ import { StandingOrder } from 'src/app/model/standingorder';
   templateUrl: './standing-order-table.component.html',
   styleUrls: ['./standing-order-table.component.css']
 })
-export class StandingOrderTableComponent implements OnInit {
+export class StandingOrderTableComponent {
   displayedColumns: string[] = ['payer', 'amount', 'title', 'nextExecution'];
   @Input() standingOrders! : StandingOrder[];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 }

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { GroupListComponent } from '../group-list/group-list.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-group-creation-dialog',
@@ -11,6 +9,5 @@ export class GroupCreationDialogComponent {
   groupName = "";
 
   constructor() {
-
   }
 }

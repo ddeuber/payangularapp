@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Group } from 'src/app/model/group';
 
 @Component({
@@ -6,14 +6,11 @@ import { Group } from 'src/app/model/group';
   templateUrl: './group-item.component.html',
   styleUrls: ['./group-item.component.css']
 })
-export class GroupItemComponent implements OnInit {
+export class GroupItemComponent {
   @Input() group!: Group;
   @Output() groupSelection = new EventEmitter<Group>();
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onClick() {
     return this.groupSelection.emit(this.group);

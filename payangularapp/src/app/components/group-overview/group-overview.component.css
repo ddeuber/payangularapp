@@ -2,6 +2,14 @@
   width: 100%;
 }
 
+.small-right-margin {
+   margin-right: 10px;
+}
+
+.group-icon-buttons {
+  text-align: right;
+}
+
 mat-icon:hover {
   cursor: pointer;
 }

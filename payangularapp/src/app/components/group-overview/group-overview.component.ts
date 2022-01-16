@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Balance } from 'src/app/model/balance';
 import { Group } from 'src/app/model/group';
@@ -15,6 +15,7 @@ export class GroupOverviewComponent {
   @Input() balances!: Balance[];
   @Output() leaveGroup = new EventEmitter<Group>();
   @Output() addMember = new EventEmitter<string>();
+  @Output() addTransaction = new EventEmitter<Group>();
 
   constructor(private dialog: MatDialog) {
   }
@@ -35,5 +36,9 @@ export class GroupOverviewComponent {
     addMemberDialog.afterClosed().subscribe(
       (memberEmail: string) => { if (memberEmail) this.addMember.emit(memberEmail) }
     );
+  }
+
+  onAddTransaction() {
+    this.addTransaction.emit(this.group);
   }
 }

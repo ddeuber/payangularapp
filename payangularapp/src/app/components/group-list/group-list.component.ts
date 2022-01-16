@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GroupCreationDialogComponent } from '../group-creation-dialog/group-creation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Group } from 'src/app/model/group';

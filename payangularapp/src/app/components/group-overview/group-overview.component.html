@@ -1,11 +1,12 @@
   <table class="group-overview-header">
     <tr>
       <td>
-        <h2>{{group?.name}}</h2>
+        <h2>{{group.name}}</h2>
       </td>
-      <td style="text-align: right">
-        <mat-icon style="margin-right: 10px" (click)="onAddMember()">group_add</mat-icon>
-        <mat-icon (click)="onLeaveGroup()">delete</mat-icon>
+      <td class="group-icon-buttons">
+        <mat-icon class="small-right-margin" (click)="onAddTransaction()" matTooltip="Add transaction">add_shopping_cart</mat-icon>
+        <mat-icon class="small-right-margin" (click)="onAddMember()" matTooltip="Add member">group_add</mat-icon>
+        <mat-icon (click)="onLeaveGroup()" matTooltip="Leave group">delete</mat-icon>
       </td>
     </tr>
   </table>

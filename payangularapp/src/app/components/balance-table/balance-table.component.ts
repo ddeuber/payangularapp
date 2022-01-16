@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Balance } from 'src/app/model/balance';
 
 @Component({
@@ -6,14 +6,11 @@ import { Balance } from 'src/app/model/balance';
   templateUrl: './balance-table.component.html',
   styleUrls: ['./balance-table.component.css']
 })
-export class BalanceTableComponent implements OnInit {
+export class BalanceTableComponent {
   displayedColumns: string[] = ['participant', 'spent', 'owes', 'credit'];
   @Input() balances!: Balance[];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onClick(balance: Balance): void {
     alert(JSON.stringify(balance));

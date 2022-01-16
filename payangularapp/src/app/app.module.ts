@@ -14,6 +14,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +39,8 @@ import { StandingOrderTableContainerComponent } from './components/standing-orde
 import { LeaveGroupDialogComponent } from './components/leave-group-dialog/leave-group-dialog.component';
 import { AddMemberDialogComponent } from './components/add-member-dialog/add-member-dialog.component';
 import { TopLevelSpinnerComponent } from './components/top-level-spinner/top-level-spinner.component';
+import { AddTransactionContainerComponent } from './components/add-transaction-container/add-transaction-container.component';
+import { AddTransactionComponent } from './components/add-transaction/add-transaction.component';
 
 registerLocaleData(localeDe);
 
@@ -57,6 +61,8 @@ registerLocaleData(localeDe);
     LeaveGroupDialogComponent,
     AddMemberDialogComponent,
     TopLevelSpinnerComponent,
+    AddTransactionContainerComponent,
+    AddTransactionComponent,
   ],
   imports: [
     FormsModule,
@@ -72,11 +78,13 @@ registerLocaleData(localeDe);
     MatListModule,
     MatCardModule,
     MatDialogModule,
+    MatTooltipModule,
     MatTableModule,
     MatTabsModule,
     MatSnackBarModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     HttpClientModule
   ],
   providers: [
