@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, Credentials } from 'src/app/services/auth-service.service';
+import { Credentials } from 'src/app/model/credentials';
+import { AuthService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-login-container',

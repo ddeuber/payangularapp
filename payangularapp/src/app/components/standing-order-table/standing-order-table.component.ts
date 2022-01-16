@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StandingOrder } from 'src/app/services/standing-order.service';
+import { StandingOrder } from 'src/app/model/standingorder';
 
 @Component({
   selector: 'app-standing-order-table[standingOrders]',

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Balance } from 'src/app/services/balance.service';
-import { Group } from 'src/app/services/group.service';
+import { Balance } from 'src/app/model/balance';
 
 @Component({
   selector: 'app-balance-table[balances]',

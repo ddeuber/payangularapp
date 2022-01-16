@@ -3,8 +3,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
-import { Balance, BalanceService } from 'src/app/services/balance.service';
-import { Group, GroupService } from 'src/app/services/group.service';
+import { Balance } from 'src/app/model/balance';
+import { Group } from 'src/app/model/group';
+import { BalanceService } from 'src/app/services/balance.service';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
   selector: 'app-group-overview-container',

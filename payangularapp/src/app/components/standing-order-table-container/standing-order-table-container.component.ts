@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Group } from 'src/app/services/group.service';
-import { StandingOrder, StandingOrderService } from 'src/app/services/standing-order.service';
+import { Group } from 'src/app/model/group';
+import { StandingOrder } from 'src/app/model/standingorder';
+import { StandingOrderService } from 'src/app/services/standing-order.service';
 
 @Component({
   selector: 'app-standing-order-table-container',
