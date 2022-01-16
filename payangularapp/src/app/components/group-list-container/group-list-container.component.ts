@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Group, GroupService } from 'src/app/services/group.service';
+import { Group } from 'src/app/model/group';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
   selector: 'app-group-list-container',

@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { LoginContainerComponent } from './components/login-container/login-cont
 import { StandingOrderTableContainerComponent } from './components/standing-order-table-container/standing-order-table-container.component';
 import { LeaveGroupDialogComponent } from './components/leave-group-dialog/leave-group-dialog.component';
 import { AddMemberDialogComponent } from './components/add-member-dialog/add-member-dialog.component';
+import { TopLevelSpinnerComponent } from './components/top-level-spinner/top-level-spinner.component';
 
 registerLocaleData(localeDe);
 
@@ -54,6 +56,7 @@ registerLocaleData(localeDe);
     StandingOrderTableContainerComponent,
     LeaveGroupDialogComponent,
     AddMemberDialogComponent,
+    TopLevelSpinnerComponent,
   ],
   imports: [
     FormsModule,
@@ -73,6 +76,7 @@ registerLocaleData(localeDe);
     MatTabsModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     HttpClientModule
   ],
   providers: [

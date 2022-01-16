@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 import { TokenService } from './token.service';
+import { Credentials } from '../model/credentials';
 
 interface JwtTokens {
   access_token: string;
@@ -13,11 +14,6 @@ interface JwtTokens {
 
 interface AccessToken {
   access_token: string;
-}
-
-export interface Credentials {
-  email: string;
-  password: string;
 }
 
 @Injectable({

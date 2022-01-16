@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GroupCreationDialogComponent } from '../group-creation-dialog/group-creation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Group } from 'src/app/services/group.service';
+import { Group } from 'src/app/model/group';
 
 @Component({
   selector: 'app-group-list',

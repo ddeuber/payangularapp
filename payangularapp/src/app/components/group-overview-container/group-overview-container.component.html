@@ -1,4 +1,8 @@
-<ng-container *ngIf="balances$ | async as balances">
+<ng-container *ngIf="balances$ | async as balances; else loading">
   <app-group-overview [group]="group!" [balances]="balances" (leaveGroup)="onLeaveGroup($event)"
     (addMember)="onAddMember($event)"></app-group-overview>
 </ng-container>
+
+<ng-template #loading>
+  <app-top-level-spinner></app-top-level-spinner>
+</ng-template>

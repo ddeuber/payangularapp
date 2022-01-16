@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from 'src/app/services/auth-service.service';
+import { Credentials } from 'src/app/model/credentials';
 
 @Component({
   selector: 'app-login',

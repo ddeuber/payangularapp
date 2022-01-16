@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Balance } from 'src/app/model/balance';
-import { Group } from 'src/app/services/group.service';
+import { Group } from 'src/app/model/group';
 import { AddMemberDialogComponent } from '../add-member-dialog/add-member-dialog.component';
 import { LeaveGroupDialogComponent } from '../leave-group-dialog/leave-group-dialog.component';
 

@@ -3,11 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-
-export interface Group {
-  id: number;
-  name: string;
-}
+import { Group } from '../model/group';
 
 interface Groups {
   groups: Group[];
