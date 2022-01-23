@@ -35,7 +35,6 @@ import { registerLocaleData } from '@angular/common';
 import { GroupOverviewContainerComponent } from './components/group-overview-container/group-overview-container.component';
 import { GroupListContainerComponent } from './components/group-list-container/group-list-container.component';
 import { LoginContainerComponent } from './components/login-container/login-container.component';
-import { StandingOrderTableContainerComponent } from './components/standing-order-table-container/standing-order-table-container.component';
 import { LeaveGroupDialogComponent } from './components/leave-group-dialog/leave-group-dialog.component';
 import { AddMemberDialogComponent } from './components/add-member-dialog/add-member-dialog.component';
 import { TopLevelSpinnerComponent } from './components/top-level-spinner/top-level-spinner.component';
@@ -57,7 +56,6 @@ registerLocaleData(localeDe);
     GroupOverviewContainerComponent,
     GroupListContainerComponent,
     LoginContainerComponent,
-    StandingOrderTableContainerComponent,
     LeaveGroupDialogComponent,
     AddMemberDialogComponent,
     TopLevelSpinnerComponent,

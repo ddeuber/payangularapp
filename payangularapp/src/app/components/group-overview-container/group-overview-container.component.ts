@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
 import { Balance } from 'src/app/model/balance';
 import { Group } from 'src/app/model/group';
+import { StandingOrder } from 'src/app/model/standingorder';
 import { BalanceService } from 'src/app/services/balance.service';
 import { GroupService } from 'src/app/services/group.service';
+import { StandingOrderService } from 'src/app/services/standing-order.service';
 
 @Component({
   selector: 'app-group-overview-container',
@@ -15,15 +17,18 @@ import { GroupService } from 'src/app/services/group.service';
 })
 export class GroupOverviewContainerComponent {
   group: Group | undefined;
-  balances$: Observable<Balance[] | undefined>;
+  balancesAndStandingOrders$: Observable<{balances: Balance[], standingOrders: StandingOrder[]} | undefined>;
 
-  constructor(private groupService: GroupService, private balanceService: BalanceService, private router: Router,
-    private activatedRoute: ActivatedRoute, private snackBar: MatSnackBar) {
+  constructor(private groupService: GroupService, private balanceService: BalanceService, private standingOrderService: StandingOrderService,
+    private router: Router, private activatedRoute: ActivatedRoute, private snackBar: MatSnackBar) {
 
-    this.balances$ = this.activatedRoute.params.pipe(
+    this.balancesAndStandingOrders$ = this.activatedRoute.params.pipe(
       mergeMap(params => this.groupService.getGroupById(params['id'])),
       tap((group: Group | undefined) => this.group = group),
-      mergeMap((group: Group | undefined) => group ? this.balanceService.loadBalances(group) : of(undefined))
+      mergeMap((group: Group | undefined) => group ? forkJoin({
+        balances: this.balanceService.loadBalances(group),
+        standingOrders: this.standingOrderService.loadStandingOrders(group)
+      }) : of(undefined))
     );
   }
 

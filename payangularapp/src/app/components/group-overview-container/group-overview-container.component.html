@@ -1,5 +1,8 @@
-<ng-container *ngIf="balances$ | async as balances; else loading">
-  <app-group-overview [group]="group!" [balances]="balances"
+<ng-container *ngIf="balancesAndStandingOrders$ | async as balancesAndStandingOrders; else loading">
+  <app-group-overview
+    [group]="group!"
+    [balances]="balancesAndStandingOrders.balances"
+    [standingOrders]="balancesAndStandingOrders.standingOrders"
     (leaveGroup)="onLeaveGroup($event)"
     (addTransaction)="onAddTransaction($event)"
     (addMember)="onAddMember($event)">

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Balance } from 'src/app/model/balance';
 import { Group } from 'src/app/model/group';
+import { StandingOrder } from 'src/app/model/standingorder';
 import { AddMemberDialogComponent } from '../add-member-dialog/add-member-dialog.component';
 import { LeaveGroupDialogComponent } from '../leave-group-dialog/leave-group-dialog.component';
 
@@ -13,6 +14,7 @@ import { LeaveGroupDialogComponent } from '../leave-group-dialog/leave-group-dia
 export class GroupOverviewComponent {
   @Input() group!: Group;
   @Input() balances!: Balance[];
+  @Input() standingOrders!: StandingOrder[];
   @Output() leaveGroup = new EventEmitter<Group>();
   @Output() addMember = new EventEmitter<string>();
   @Output() addTransaction = new EventEmitter<Group>();
