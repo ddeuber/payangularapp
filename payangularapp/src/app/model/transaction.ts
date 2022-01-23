@@ -1,7 +1,6 @@
-export interface Transaction {
+export interface TransactionCreationData {
   amount: number;
   comment: string;
-  creator: string;
   involved: string[];
   payer: string;
   timestamp: number;

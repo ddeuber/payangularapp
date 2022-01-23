@@ -1,22 +1,39 @@
-<h3>Add Transaction</h3>
+<h2>Add Transaction: {{group.name}}</h2>
 
-<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
-  <div>
-    <mat-form-field class="full-width-input">
-      <mat-label>Title</mat-label>
-      <input matInput formControlName="title">
-    </mat-form-field>
-  </div>
+<ng-container *ngIf="form">
+  <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+    <div>
+      <mat-form-field class="full-width-input">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field class="full-width-input">
-      <mat-label>Amount</mat-label>
-      <input matInput type="number" formControlName="amount">
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field class="full-width-input">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" step="0.05" formControlName="amount">
+      </mat-form-field>
+    </div>
 
+    <div>
+      <mat-form-field class="full-width-input">
+        <mat-label>Payer</mat-label>
+        <mat-select formControlName="payer">
+          <mat-option *ngFor="let participant of participants" [value]="participant">{{participant}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <div class="small-top-margin">
-    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
-  </div>
-</form>
+    <div>
+      <p>Participants</p>
+      <div *ngFor="let control of getCheckboxControls(); let i = index">
+        <mat-checkbox [formControl]="control" class="very-small-top-margin small-left-margin">{{participants[i]}}</mat-checkbox>
+      </div>
+    </div>
+
+    <div class="small-top-margin">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || hasNoSelectedParticipants">Submit</button>
+    </div>
+  </form>
+</ng-container>

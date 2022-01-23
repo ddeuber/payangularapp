@@ -1,7 +1,7 @@
 
-<ng-component *ngIf="participants$ | async as participants; else loading">
-  <app-add-transaction [participants]="participants"></app-add-transaction>
-</ng-component>
+<ng-container *ngIf="participants$ | async as participants; else loading">
+  <app-add-transaction [participants]="participants" [group]="group!" (addTransaction)="onAddTransaction($event)"></app-add-transaction>
+</ng-container>
 
 <ng-template #loading>
   <app-top-level-spinner></app-top-level-spinner>
