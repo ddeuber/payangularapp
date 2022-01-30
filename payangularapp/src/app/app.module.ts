@@ -41,6 +41,7 @@ import { AddMemberDialogComponent } from './components/add-member-dialog/add-mem
 import { TopLevelSpinnerComponent } from './components/top-level-spinner/top-level-spinner.component';
 import { AddTransactionContainerComponent } from './components/add-transaction-container/add-transaction-container.component';
 import { AddTransactionComponent } from './components/add-transaction/add-transaction.component';
+import { AddParticipantDialogComponent } from './components/add-participant-dialog/add-participant-dialog.component';
 
 registerLocaleData(localeDe);
 
@@ -62,6 +63,7 @@ registerLocaleData(localeDe);
     TopLevelSpinnerComponent,
     AddTransactionContainerComponent,
     AddTransactionComponent,
+    AddParticipantDialogComponent,
   ],
   imports: [
     FormsModule,

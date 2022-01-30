@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { timestamp } from 'rxjs';
-import { Group } from 'src/app/model/group';
-import { TransactionCreationData } from 'src/app/model/transaction';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Group} from 'src/app/model/group';
+import {TransactionCreationData} from 'src/app/model/transaction';
+import {MatDialog} from "@angular/material/dialog";
+import {AddParticipantDialogComponent} from "../add-participant-dialog/add-participant-dialog.component";
 
 @Component({
   selector: 'app-add-transaction',
@@ -19,7 +20,7 @@ export class AddTransactionComponent implements OnInit {
 
   form: FormGroup | undefined;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -57,8 +58,27 @@ export class AddTransactionComponent implements OnInit {
   }
 
   private getSelectedInvolved(): string[] {
-    return Array.from(Array(this.participants.length).keys())
+    return Array.from(Array(this.getCheckboxControls().length).keys())
       .filter(i => this.getCheckboxControls()[i].value)
       .map(i => this.participants[i]);
+  }
+
+  onAddParticipant(): void {
+    const dialogRef = this.dialog.open(AddParticipantDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe((participantName: string) => {
+      if (participantName) {
+        this.participants.push(participantName);
+        this.refreshCheckboxes();
+      }
+    });
+  }
+
+  private refreshCheckboxes(): void {
+    let selectedInvolved = this.getSelectedInvolved();
+    this.form?.setControl('involvedCheckboxes',
+      this.formBuilder.array(this.participants.map(p => selectedInvolved.includes(p))));
   }
 }
