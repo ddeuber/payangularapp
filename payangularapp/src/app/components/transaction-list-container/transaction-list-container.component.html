@@ -1,0 +1,16 @@
+<ng-container *ngIf="transactionData$ | async as transactionsData; else loading">
+  <app-transaction-list
+    [participants]="transactionsData.participants"
+    [transactions]="transactionsData.transactions"
+    [payer]="payer"
+    [involved]="participant"
+    [totalNumberOfTransactions]="transactionsData.totalNumberOfTransactions"
+    [itemsPerPage]="itemsPerPage"
+    [offset]="offset"
+    (loadTransactions)="onLoadTransaction($event)">
+  </app-transaction-list>
+</ng-container>
+
+<ng-template #loading>
+  <app-top-level-spinner></app-top-level-spinner>
+</ng-template>

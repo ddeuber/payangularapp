@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { tap, mergeMap } from 'rxjs/operators';
 import { Balance } from 'src/app/model/balance';
 import { Group } from 'src/app/model/group';
@@ -17,18 +17,18 @@ import { StandingOrderService } from 'src/app/services/standing-order.service';
 })
 export class GroupOverviewContainerComponent {
   group: Group | undefined;
-  balancesAndStandingOrders$: Observable<{balances: Balance[], standingOrders: StandingOrder[]} | undefined>;
+  balancesAndStandingOrders$: Observable<{balances: Balance[], standingOrders: StandingOrder[]}>;
 
   constructor(private groupService: GroupService, private balanceService: BalanceService, private standingOrderService: StandingOrderService,
     private router: Router, private activatedRoute: ActivatedRoute, private snackBar: MatSnackBar) {
 
     this.balancesAndStandingOrders$ = this.activatedRoute.params.pipe(
       mergeMap(params => this.groupService.getGroupById(params['id'])),
-      tap((group: Group | undefined) => this.group = group),
-      mergeMap((group: Group | undefined) => group ? forkJoin({
+      tap((group: Group) => this.group = group),
+      mergeMap((group: Group) => forkJoin({
         balances: this.balanceService.loadBalances(group),
         standingOrders: this.standingOrderService.loadStandingOrders(group)
-      }) : of(undefined))
+      }))
     );
   }
 

@@ -1,0 +1,49 @@
+<h2>Transactions</h2>
+
+<mat-form-field>
+  <mat-label>Payer</mat-label>
+  <mat-select [(ngModel)]="payer" (selectionChange)="onFilterChange()">
+    <mat-option>Any payer</mat-option>
+    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="small-left-margin">
+  <mat-label>Involved</mat-label>
+  <mat-select [(ngModel)]="involved" (selectionChange)="onFilterChange()">
+    <mat-option>Any involved</mat-option>
+    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<table mat-table [dataSource]="transactions">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="payer">
+    <th mat-header-cell *matHeaderCellDef> Payer </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.payer}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.amount}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.comment}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]"
+               [length]="totalNumberOfTransactions"
+               [pageSize]="itemsPerPage"
+               (page)="onPageEvent($event)"
+               showFirstLastButtons
+               aria-label="Select page">
+</mat-paginator>

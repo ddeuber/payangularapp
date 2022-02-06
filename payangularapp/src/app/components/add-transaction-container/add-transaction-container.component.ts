@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap, Observable, tap, of } from 'rxjs';
+import { mergeMap, Observable, tap } from 'rxjs';
 import { Group } from 'src/app/model/group';
 import { TransactionCreationData } from 'src/app/model/transaction';
 import { GroupService } from 'src/app/services/group.service';
@@ -14,15 +14,15 @@ import { TransactionService } from 'src/app/services/transaction.service';
 })
 export class AddTransactionContainerComponent {
   group: Group | undefined;
-  participants$: Observable<string[] | undefined>;
+  participants$: Observable<string[]>;
 
   constructor(private transactionService: TransactionService, private groupService: GroupService, private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute, private router: Router) {
 
     this.participants$ = activatedRoute.params.pipe(
       mergeMap(params => this.groupService.getGroupById(params['id'])),
-      tap((group: Group | undefined) => this.group = group),
-      mergeMap((group: Group | undefined) => group ? this.groupService.getParticipants(group) : of(undefined)),
+      tap((group: Group) => this.group = group),
+      mergeMap((group: Group) => this.groupService.loadParticipants(group))
     )
   }
 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Group } from '../model/group';
-import { TransactionCreationData } from '../model/transaction';
+import {Transaction, TransactionCreationData, TransactionLoadParams} from '../model/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,19 @@ export class TransactionService {
     return this.http.post<unknown>(environment.baseUrl + '/addtransaction/'  + group.id, transaction);
   }
 
-  loadTransactions(group: Group, payer: string, participant: string, limit: number, offset: number): Observable<TransactionCreationData[]> {
-    return this.http.get<TransactionCreationData[]>(environment.baseUrl + '/transactions/' + group.id);
+  loadTransactions(group: Group, loadParams: TransactionLoadParams): Observable<Transaction[]> {
+    return this.http.post<Transaction[]>(environment.baseUrl + '/transactions/' + group.id,
+      {
+        payer: loadParams.payer,
+        participant: loadParams.participant,
+        limit: loadParams.limit,
+        offset: loadParams.offset
+      });
+  }
+
+  loadTotalNumberOfTransactions(group: Group, payer?: string, participant?: string): Observable<number> {
+    return this.http.post<number>(environment.baseUrl + '/counttransactions/' + group.id, {
+      payer, participant
+    });
   }
 }

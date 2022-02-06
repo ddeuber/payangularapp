@@ -1,0 +1,13 @@
+table {
+  max-width: 95vw;
+  width: 800px;
+}
+
+.mat-row:hover {
+  background-color: rgb(220, 220, 220);
+  cursor: pointer;
+}
+
+.mat-header-row {
+  background-color: rgb(220, 220, 220);
+}

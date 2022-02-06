@@ -5,3 +5,14 @@ export interface TransactionCreationData {
   payer: string;
   timestamp: number;
 }
+
+export interface Transaction extends TransactionCreationData {
+  creator: string;
+}
+
+export interface TransactionLoadParams {
+  limit: number;
+  offset: number;
+  payer?: string;
+  participant?: string;
+}

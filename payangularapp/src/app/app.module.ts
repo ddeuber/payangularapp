@@ -42,6 +42,9 @@ import { TopLevelSpinnerComponent } from './components/top-level-spinner/top-lev
 import { AddTransactionContainerComponent } from './components/add-transaction-container/add-transaction-container.component';
 import { AddTransactionComponent } from './components/add-transaction/add-transaction.component';
 import { AddParticipantDialogComponent } from './components/add-participant-dialog/add-participant-dialog.component';
+import { TransactionListContainerComponent } from './components/transaction-list-container/transaction-list-container.component';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 registerLocaleData(localeDe);
 
@@ -64,31 +67,34 @@ registerLocaleData(localeDe);
     AddTransactionContainerComponent,
     AddTransactionComponent,
     AddParticipantDialogComponent,
+    TransactionListContainerComponent,
+    TransactionListComponent,
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatChipsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatCardModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    HttpClientModule
-  ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatChipsModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatCardModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSnackBarModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        HttpClientModule,
+        MatPaginatorModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
