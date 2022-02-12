@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Location} from '@angular/common';
 import {TransactionService} from "../../services/transaction.service";
-import {combineLatest, forkJoin, mergeMap, Observable } from "rxjs";
+import {combineLatest, forkJoin, mergeMap, Observable} from "rxjs";
 import {Transaction, TransactionLoadParams} from "../../model/transaction";
 import {GroupService} from "../../services/group.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -11,7 +11,6 @@ import {map, tap} from "rxjs/operators";
 interface LoadTransactionDataResult {
   transactions: Transaction[],
   participants: string[],
-  totalNumberOfTransactions: number
 }
 
 @Component({
@@ -20,11 +19,14 @@ interface LoadTransactionDataResult {
   styleUrls: ['./transaction-list-container.component.css']
 })
 export class TransactionListContainerComponent {
+  static readonly ITEMS_PER_REQUEST = 20;
+
   transactionData$: Observable<LoadTransactionDataResult>
-  itemsPerPage = 10;
-  offset = 0;
+
+  loadedTransactions: Transaction[] = [];
   payer: string | undefined;
   participant: string | undefined;
+  offset = 0;
 
   constructor(private transactionService: TransactionService, private groupService: GroupService,
               private location: Location, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -43,29 +45,40 @@ export class TransactionListContainerComponent {
       mergeMap((res: { group: Group, loadParams: TransactionLoadParams }) => forkJoin({
         transactions: this.transactionService.loadTransactions(res.group, res.loadParams),
         participants: this.groupService.loadParticipants(res.group),
-        totalNumberOfTransactions: this.transactionService.loadTotalNumberOfTransactions(res.group, res.loadParams.payer, res.loadParams.participant)
-      }))
+      })),
+      tap(this.appendToAlreadyLoadedTransactions)
     );
   }
 
   private parseUrlParams(params: Params): TransactionLoadParams {
-    this.itemsPerPage = params['limit'] ? params['limit'] : this.itemsPerPage;
-    this.offset = params['offset'] ? params['offset'] : this.offset;
     this.payer = params['payer'];
     this.participant = params['participant'];
 
     return {
-      limit: this.itemsPerPage,
+      limit: TransactionListContainerComponent.ITEMS_PER_REQUEST,
       offset: this.offset,
       payer: this.payer,
       participant: this.participant
     };
   }
 
-  onLoadTransaction(loadParams: TransactionLoadParams) {
+  private appendToAlreadyLoadedTransactions(loadTransactionResult: LoadTransactionDataResult) {
+    this.loadedTransactions = this.loadedTransactions ? this.loadedTransactions.concat(loadTransactionResult.transactions) : loadTransactionResult.transactions;
+    return {
+      transactions: this.loadedTransactions,
+      participants: loadTransactionResult.participants
+    }
+  }
+
+  onChangedFilter(filters: { payer?: string, participant?: string }): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: loadParams
+      queryParams: filters
     })
+  }
+
+  onLoadMoreTransactions(): void {
+    this.offset = this.loadedTransactions.length;
+    this.transactionData$ = this.loadTransactions();
   }
 }

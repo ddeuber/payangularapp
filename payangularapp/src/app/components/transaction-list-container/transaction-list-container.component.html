@@ -4,10 +4,8 @@
     [transactions]="transactionsData.transactions"
     [payer]="payer"
     [involved]="participant"
-    [totalNumberOfTransactions]="transactionsData.totalNumberOfTransactions"
-    [itemsPerPage]="itemsPerPage"
-    [offset]="offset"
-    (loadTransactions)="onLoadTransaction($event)">
+    (scrollToBottom)="onLoadMoreTransactions()"
+    (changedFilter)="onChangedFilter($event)">
   </app-transaction-list>
 </ng-container>
 
