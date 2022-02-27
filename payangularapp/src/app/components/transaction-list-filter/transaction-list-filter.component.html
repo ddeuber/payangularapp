@@ -1,0 +1,15 @@
+<mat-form-field>
+  <mat-label>Payer</mat-label>
+  <mat-select [(ngModel)]="payer" (selectionChange)="onFilterChange()">
+    <mat-option>Any payer</mat-option>
+    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="small-left-margin">
+  <mat-label>Involved</mat-label>
+  <mat-select [(ngModel)]="involved" (selectionChange)="onFilterChange()">
+    <mat-option>Any involved</mat-option>
+    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+  </mat-select>
+</mat-form-field>
