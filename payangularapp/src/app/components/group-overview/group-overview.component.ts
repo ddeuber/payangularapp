@@ -18,11 +18,12 @@ export class GroupOverviewComponent {
   @Output() leaveGroup = new EventEmitter<Group>();
   @Output() addMember = new EventEmitter<string>();
   @Output() addTransaction = new EventEmitter<Group>();
+  @Output() listTransactions = new EventEmitter<{ group: Group, payer: string }>();
 
   constructor(private dialog: MatDialog) {
   }
 
-  onLeaveGroup() {
+  onLeaveGroup(): void {
     const leaveDialog = this.dialog.open(LeaveGroupDialogComponent, {
       data: { group: this.group }
     });
@@ -31,7 +32,7 @@ export class GroupOverviewComponent {
     );
   }
 
-  onAddMember() {
+  onAddMember(): void {
     const addMemberDialog = this.dialog.open(AddMemberDialogComponent, {
       width: '300px'
     });
@@ -40,7 +41,11 @@ export class GroupOverviewComponent {
     );
   }
 
-  onAddTransaction() {
+  onAddTransaction(): void {
     this.addTransaction.emit(this.group);
+  }
+
+  onClickBalance(balance: Balance): void {
+    this.listTransactions.emit({group: this.group, payer: balance.participant});
   }
 }

@@ -1,23 +1,4 @@
-<h2>Transactions</h2>
-
-<mat-form-field>
-  <mat-label>Payer</mat-label>
-  <mat-select [(ngModel)]="payer" (selectionChange)="onFilterChange()">
-    <mat-option>Any payer</mat-option>
-    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="small-left-margin">
-  <mat-label>Involved</mat-label>
-  <mat-select [(ngModel)]="involved" (selectionChange)="onFilterChange()">
-    <mat-option>Any involved</mat-option>
-    <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<table mat-table [dataSource]="transactions">
-
+<table mat-table [dataSource]="transactions$">
   <!-- Position Column -->
   <ng-container matColumnDef="payer">
     <th mat-header-cell *matHeaderCellDef> Payer </th>

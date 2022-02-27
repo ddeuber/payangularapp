@@ -48,4 +48,10 @@ export class GroupOverviewContainerComponent {
   onAddTransaction(group: Group): void{
     this.router.navigate(['groups', group.id, 'addtransaction']);
   }
+
+  onListTransactions(params: {group: Group, payer: string}) {
+    this.router.navigate(['groups', params.group.id, 'transactions'], {
+      queryParams: {payer: params.payer}
+    });
+  }
 }

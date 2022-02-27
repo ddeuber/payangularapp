@@ -1,14 +1,21 @@
-<ng-container *ngIf="transactionData$ | async as transactionsData; else loading">
-  <app-transaction-list
-    [participants]="transactionsData.participants"
-    [transactions]="transactionsData.transactions"
+<h2>Transactions</h2>
+
+<ng-container *ngIf="participants$ | async as participants; else loading">
+  <app-transaction-list-filter
+    [participants]="participants"
     [payer]="payer"
     [involved]="participant"
-    (scrollToBottom)="onLoadMoreTransactions()"
     (changedFilter)="onChangedFilter($event)">
-  </app-transaction-list>
+  </app-transaction-list-filter>
 </ng-container>
 
 <ng-template #loading>
-  <app-top-level-spinner></app-top-level-spinner>
+  <mat-spinner class="small-margin-bottom" [diameter]="25"></mat-spinner>
 </ng-template>
+
+<app-transaction-list
+  [transactions$]="transactions$"
+  (scrollToBottom)="onLoadMoreTransactions()">
+</app-transaction-list>
+
+<app-top-level-spinner class="stack-top" *ngIf="showTransactionSpinner"></app-top-level-spinner>

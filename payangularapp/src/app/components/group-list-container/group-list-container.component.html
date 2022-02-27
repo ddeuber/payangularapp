@@ -1,5 +1,7 @@
 <ng-container *ngIf="groups$ | async as groups; else loading">
-  <app-group-list [groups]="groups" (groupSelection)="onGroupSelected($event)" (groupCreation)="onCreateGroup($event)">
+  <app-group-list [groups]="groups"
+                  (groupSelection)="onGroupSelected($event)"
+                  (groupCreation)="onCreateGroup($event)">
   </app-group-list>
 </ng-container>
 

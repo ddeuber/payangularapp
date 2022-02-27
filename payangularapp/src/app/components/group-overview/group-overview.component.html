@@ -11,7 +11,7 @@
     </tr>
   </table>
 
-<app-balance-table *ngIf="balances" [balances]="balances"></app-balance-table>
+<app-balance-table [balances]="balances" (clickRow)="onClickBalance($event)"></app-balance-table>
 
 <app-standing-order-table [standingOrders]="standingOrders"></app-standing-order-table>
 

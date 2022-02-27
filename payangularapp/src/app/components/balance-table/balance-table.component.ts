@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Balance } from 'src/app/model/balance';
 
 @Component({
@@ -9,10 +9,11 @@ import { Balance } from 'src/app/model/balance';
 export class BalanceTableComponent {
   displayedColumns: string[] = ['participant', 'spent', 'owes', 'credit'];
   @Input() balances!: Balance[];
+  @Output() clickRow = new EventEmitter<Balance>();
 
   constructor() { }
 
   onClick(balance: Balance): void {
-    alert(JSON.stringify(balance));
+    this.clickRow.emit(balance);
   }
 }

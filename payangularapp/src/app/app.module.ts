@@ -45,6 +45,7 @@ import { AddParticipantDialogComponent } from './components/add-participant-dial
 import { TransactionListContainerComponent } from './components/transaction-list-container/transaction-list-container.component';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { TransactionListFilterComponent } from './components/transaction-list-filter/transaction-list-filter.component';
 
 registerLocaleData(localeDe);
 
@@ -69,6 +70,7 @@ registerLocaleData(localeDe);
     AddParticipantDialogComponent,
     TransactionListContainerComponent,
     TransactionListComponent,
+    TransactionListFilterComponent,
   ],
     imports: [
         FormsModule,
