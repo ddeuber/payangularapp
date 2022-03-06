@@ -44,9 +44,10 @@
 
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" type="submit"
-          [disabled]="!form?.valid || hasNoSelectedParticipants">Submit
+          [disabled]="!form.valid || hasNoSelectedParticipants">Submit
   </button>
   <button mat-raised-button color="secondary" type="button" (click)="onCancel()">Cancel</button>
+  <!-- TODO: add button for create another -->
 </div>
 
 </form>

@@ -35,8 +35,13 @@ export class TransactionDetailsContainerComponent {
   }
 
   revertTransaction(transaction: Transaction): Transaction {
-    transaction.amount *= -1;
-    transaction.comment = "REVERTED: " + transaction.comment;
-    return transaction;
+    let revertedTransaction = this.deepCopy(transaction);
+    revertedTransaction.amount *= -1;
+    revertedTransaction.comment = "REVERTED: " + transaction.comment;
+    return revertedTransaction;
+  }
+
+  deepCopy<T extends object>(source: T): T {
+    return JSON.parse(JSON.stringify(source))
   }
 }

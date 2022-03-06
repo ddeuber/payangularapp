@@ -31,9 +31,11 @@ export class AddTransactionContainerComponent {
 
   onAddTransaction(transaction: TransactionCreationData): void {
     this.transactionService.addTransaction(transaction, this.group!).subscribe(
-      res => {
+      () => {
         this.showSuccessSnackbar();
         this.dialogRef.close();
+        // TODO: jump to target location
+        window.location.reload();
       }
     )
   }
