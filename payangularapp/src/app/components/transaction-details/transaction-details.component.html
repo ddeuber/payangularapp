@@ -1,30 +1,36 @@
 <h2>Transaction Details</h2>
 
-<mat-grid-list cols="2" class="grid-list" rowHeight="1:2" gutterSize="0px">
-  <mat-grid-tile>
-    <mat-list>
-      <mat-list-item>Title</mat-list-item>
-      <mat-list-item>Amount</mat-list-item>
-      <mat-list-item>Creator</mat-list-item>
-      <mat-list-item>Creation date</mat-list-item>
-      <mat-list-item>Creation time</mat-list-item>
-      <mat-list-item>Payer</mat-list-item>
-      <mat-list-item>Involved</mat-list-item>
-    </mat-list>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-list>
-      <mat-list-item>{{transaction.comment}}</mat-list-item>
-      <mat-list-item>{{transaction.amount}}</mat-list-item>
-      <mat-list-item>{{transaction.creator}}</mat-list-item>
-      <mat-list-item>{{transaction.timestamp}}</mat-list-item>
-      <mat-list-item>{{transaction.timestamp}}</mat-list-item>
-      <mat-list-item>{{transaction.payer}}</mat-list-item>
-      <mat-list-item>
-          <ul>
-            <li *ngFor="let inv of transaction.involved">{{inv}}</li>
-          </ul>
-      </mat-list-item>
-    </mat-list>
-  </mat-grid-tile>
-</mat-grid-list>
+<table>
+  <tr>
+    <td>Title</td>
+    <td>{{transaction.comment}}</td>
+  </tr>
+  <tr>
+    <td>Amount</td>
+    <td>{{transaction.amount}}</td>
+  </tr>
+  <tr>
+    <td>Creator</td>
+    <td>{{transaction.creator}}</td>
+  </tr>
+  <tr>
+    <td>Creation date</td>
+    <td>{{transaction.timestamp | date: 'dd.MM.yyyy': 'UTC+1'}}</td>
+  </tr>
+  <tr>
+    <td>Creation time</td>
+    <td>{{transaction.timestamp | date: 'HH:mm': 'UTC+1'}}</td>
+  </tr>
+  <tr>
+    <td>Payer</td>
+    <td>{{transaction.payer}}</td>
+  </tr>
+  <tr>
+    <td>Involved</td>
+    <td>
+      <ul>
+        <li *ngFor="let inv of transaction.involved">{{inv}}</li>
+      </ul>
+    </td>
+  </tr>
+</table>

@@ -15,7 +15,8 @@
 
 <app-transaction-list
   [transactions$]="transactions$"
-  (scrollToBottom)="onLoadMoreTransactions()">
+  (selectTransaction)="showTransactionDetails($event)"
+  (scrollToBottom)="loadMoreTransactions()">
 </app-transaction-list>
 
 <app-top-level-spinner class="stack-top" *ngIf="showTransactionSpinner"></app-top-level-spinner>

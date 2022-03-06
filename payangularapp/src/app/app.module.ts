@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from "@angular/material/grid-list";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,8 +45,9 @@ import { AddTransactionComponent } from './components/add-transaction/add-transa
 import { AddParticipantDialogComponent } from './components/add-participant-dialog/add-participant-dialog.component';
 import { TransactionListContainerComponent } from './components/transaction-list-container/transaction-list-container.component';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
 import { TransactionListFilterComponent } from './components/transaction-list-filter/transaction-list-filter.component';
+import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
+import { TransactionDetailsContainerComponent } from './components/transaction-details-container/transaction-details-container.component';
 
 registerLocaleData(localeDe);
 
@@ -71,6 +73,8 @@ registerLocaleData(localeDe);
     TransactionListContainerComponent,
     TransactionListComponent,
     TransactionListFilterComponent,
+    TransactionDetailsComponent,
+    TransactionDetailsContainerComponent,
   ],
     imports: [
         FormsModule,
@@ -95,7 +99,7 @@ registerLocaleData(localeDe);
         MatSelectModule,
         MatCheckboxModule,
         HttpClientModule,
-        MatPaginatorModule
+        MatGridListModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

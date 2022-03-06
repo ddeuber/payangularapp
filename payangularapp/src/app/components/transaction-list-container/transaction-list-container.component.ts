@@ -18,6 +18,7 @@ export class TransactionListContainerComponent implements OnInit {
 
   participants$!: Observable<string[]>;
   transactions$!: Observable<Transaction[]>;
+  group: Group | undefined;
 
   // The following fields are set in reset()
   showTransactionSpinner!:  boolean;
@@ -63,6 +64,7 @@ export class TransactionListContainerComponent implements OnInit {
   private loadParticipants(): void {
     this.participants$ = this.activatedRoute.params.pipe(
       mergeMap(params => this.groupService.getGroupById(params['id'])),
+      tap((group: Group) => this.group = group),
       mergeMap((group: Group) => this.groupService.loadParticipants(group))
     );
   }
@@ -93,9 +95,17 @@ export class TransactionListContainerComponent implements OnInit {
     })
   }
 
-  onLoadMoreTransactions(): void {
+  loadMoreTransactions(): void {
     if (!this.allTransactionsLoaded) {
       this.loadTransactions();
+    }
+  }
+
+  showTransactionDetails(transaction: Transaction): void {
+    if (this.group) {
+      this.router.navigate(['groups', this.group.id, 'transaction'], {
+        state: transaction
+      })
     }
   }
 }

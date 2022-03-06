@@ -19,6 +19,11 @@ export class TransactionListComponent {
   displayedColumns = ['payer', 'amount', 'title'];
 
   @Output() scrollToBottom = new EventEmitter<unknown>();
+  @Output() selectTransaction = new EventEmitter<Transaction>();
+
+  onClickTransaction(transaction: Transaction): void {
+    this.selectTransaction.emit(transaction);
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {
