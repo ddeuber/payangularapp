@@ -2,6 +2,7 @@ table {
   width: 600px;
   max-width: 90vw;
   border-spacing: 0;
+  margin-bottom: 20px;
 }
 
 table td {

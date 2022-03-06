@@ -1,6 +1,11 @@
-
 <ng-container *ngIf="participants$ | async as participants; else loading">
-  <app-add-transaction [participants]="participants" [group]="group!" (addTransaction)="onAddTransaction($event)"></app-add-transaction>
+  <app-add-transaction
+    [participants]="participants"
+    [group]="group"
+    [prefilledTransaction]="dialogData.transaction"
+    (cancel)="dialogRef.close()"
+    (addTransaction)="onAddTransaction($event)">
+  </app-add-transaction>
 </ng-container>
 
 <ng-template #loading>

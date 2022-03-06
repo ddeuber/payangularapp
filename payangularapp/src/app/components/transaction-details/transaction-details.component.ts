@@ -1,5 +1,6 @@
-import {Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Transaction} from "../../model/transaction";
+import {Group} from "../../model/group";
 
 @Component({
   selector: 'app-transaction-details',
@@ -8,6 +9,10 @@ import {Transaction} from "../../model/transaction";
 })
 export class TransactionDetailsComponent {
   @Input() transaction!: Transaction;
+  @Input() group!: Group;
+  @Output() revertTransaction = new EventEmitter<{group: Group, transaction: Transaction}>();
 
-
+  onRevertTransaction(): void {
+    this.revertTransaction.emit({group: this.group, transaction: this.transaction});
+  }
 }

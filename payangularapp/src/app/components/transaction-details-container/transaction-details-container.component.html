@@ -1,1 +1,7 @@
-<app-transaction-details [transaction]="transaction"></app-transaction-details>
+<ng-container *ngIf="group$ | async as group">
+  <app-transaction-details
+    (revertTransaction)="openDialogWithRevertedTransaction($event)"
+    [group]="group"
+    [transaction]="transaction">
+  </app-transaction-details>
+</ng-container>

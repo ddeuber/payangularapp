@@ -1,3 +1,7 @@
 .small-left-margin {
   margin-left: 10px;
 }
+
+mat-form-field {
+  max-width: 40vw;
+}

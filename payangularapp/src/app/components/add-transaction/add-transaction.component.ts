@@ -13,10 +13,9 @@ import {AddParticipantDialogComponent} from "../add-participant-dialog/add-parti
 export class AddTransactionComponent implements OnInit {
   @Input() group!: Group;
   @Input() participants!: string[];
-  @Input() prefilledTitle: string | undefined;
-  @Input() prefilledPayer: string | undefined;
-  @Input() prefilledAmount: number | undefined;
+  @Input() prefilledTransaction: TransactionCreationData | undefined;
   @Output() addTransaction = new EventEmitter<TransactionCreationData>();
+  @Output() cancel = new EventEmitter<unknown>();
 
   form: FormGroup | undefined;
 
@@ -25,10 +24,10 @@ export class AddTransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      title: [this.prefilledTitle, [Validators.required]],
-      amount: [this.prefilledAmount, [Validators.required]],
-      payer: [this.prefilledPayer, [Validators.required]],
-      involvedCheckboxes: this.formBuilder.array(this.participants.map(p => false))
+      title: [this.prefilledTransaction?.comment, [Validators.required]],
+      amount: [this.prefilledTransaction?.amount, [Validators.required]],
+      payer: [this.prefilledTransaction?.payer, [Validators.required]],
+      involvedCheckboxes: this.formBuilder.array(this.participants.map(p => this.prefilledTransaction?.involved.includes(p)))
     });
   }
 
@@ -55,6 +54,10 @@ export class AddTransactionComponent implements OnInit {
       }
       this.addTransaction.emit(transaction);
     }
+  }
+
+  onCancel(): void {
+    this.cancel.emit();
   }
 
   private getSelectedInvolved(): string[] {
