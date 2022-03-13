@@ -17,7 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatGridListModule } from "@angular/material/grid-list";
+import { MatMenuModule } from "@angular/material/menu";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +48,8 @@ import { TransactionListComponent } from './components/transaction-list/transact
 import { TransactionListFilterComponent } from './components/transaction-list-filter/transaction-list-filter.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { TransactionDetailsContainerComponent } from './components/transaction-details-container/transaction-details-container.component';
+import { GroupSettingsContainerComponent } from './components/group-settings-container/group-settings-container.component';
+import { GroupSettingsComponent } from './components/group-settings/group-settings.component';
 
 registerLocaleData(localeDe);
 
@@ -75,6 +77,8 @@ registerLocaleData(localeDe);
     TransactionListFilterComponent,
     TransactionDetailsComponent,
     TransactionDetailsContainerComponent,
+    GroupSettingsContainerComponent,
+    GroupSettingsComponent,
   ],
     imports: [
         FormsModule,
@@ -99,7 +103,7 @@ registerLocaleData(localeDe);
         MatSelectModule,
         MatCheckboxModule,
         HttpClientModule,
-        MatGridListModule
+        MatMenuModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

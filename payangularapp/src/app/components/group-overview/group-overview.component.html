@@ -1,16 +1,30 @@
-  <table class="group-overview-header">
-    <tr>
-      <td>
-        <h2>{{group.name}}</h2>
-      </td>
-      <td class="group-icon-buttons">
-        <mat-icon class="small-right-margin" (click)="onAddTransaction()" matTooltip="Add transaction">add_shopping_cart</mat-icon>
-        <mat-icon class="small-right-margin" (click)="onAddMember()" matTooltip="Add member">group_add</mat-icon>
-        <mat-icon (click)="onLeaveGroup()" matTooltip="Leave group">delete</mat-icon>
-      </td>
-    </tr>
-  </table>
+<div class="group-overview-header">
+  <div>
+    <h2>{{group.name}}</h2>
+  </div>
 
+  <div>
+    <mat-icon class="action-icon" (click)="onAddTransaction()" matTooltip="Add transaction">add_shopping_cart</mat-icon>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="onOpenSettings()" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button (click)="onAddMember()" mat-menu-item>
+        <mat-icon>group_add</mat-icon>
+        <span>Add member</span>
+      </button>
+      <button (click)="onLeaveGroup()" mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Leave group</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
 <app-balance-table [balances]="balances" (clickRow)="onClickBalance($event)"></app-balance-table>
 
 <app-standing-order-table [standingOrders]="standingOrders"></app-standing-order-table>

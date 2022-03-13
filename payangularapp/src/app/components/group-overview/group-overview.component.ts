@@ -15,10 +15,12 @@ export class GroupOverviewComponent {
   @Input() group!: Group;
   @Input() balances!: Balance[];
   @Input() standingOrders!: StandingOrder[];
+
   @Output() leaveGroup = new EventEmitter<Group>();
   @Output() addMember = new EventEmitter<string>();
   @Output() addTransaction = new EventEmitter<Group>();
   @Output() listTransactions = new EventEmitter<{ group: Group, payer: string }>();
+  @Output() openSettings = new EventEmitter<Group>();
 
   constructor(private dialog: MatDialog) {
   }
@@ -47,5 +49,9 @@ export class GroupOverviewComponent {
 
   onClickBalance(balance: Balance): void {
     this.listTransactions.emit({group: this.group, payer: balance.participant});
+  }
+
+  onOpenSettings(): void {
+    this.openSettings.emit(this.group);
   }
 }

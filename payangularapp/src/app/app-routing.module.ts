@@ -9,6 +9,9 @@ import {
 import {
   TransactionDetailsContainerComponent
 } from "./components/transaction-details-container/transaction-details-container.component";
+import {
+  GroupSettingsContainerComponent
+} from "./components/group-settings-container/group-settings-container.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginContainerComponent},
@@ -16,7 +19,8 @@ const routes: Routes = [
   { path: 'groups', component: GroupListContainerComponent},
   { path: 'groups/:id', component: GroupOverviewContainerComponent},
   { path: 'groups/:id/transactions', component: TransactionListContainerComponent},
-  { path: 'groups/:id/transaction', component: TransactionDetailsContainerComponent}
+  { path: 'groups/:id/transaction', component: TransactionDetailsContainerComponent},
+  { path: 'groups/:id/settings', component: GroupSettingsContainerComponent}
 ];
 
 @NgModule({

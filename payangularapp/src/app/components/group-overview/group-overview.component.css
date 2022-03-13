@@ -1,9 +1,13 @@
 .group-overview-header {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.small-right-margin {
-   margin-right: 10px;
+.action-icon {
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 .group-icon-buttons {

@@ -35,12 +35,12 @@ export class GroupOverviewContainerComponent {
   }
 
   onLeaveGroup(group: Group): void {
-    this.groupService.leaveGroup(group).subscribe(res => this.router.navigate(['groups']));
+    this.groupService.leaveGroup(group).subscribe(() => this.router.navigate(['groups']));
   }
 
   onAddMember(memberEmail: string): void {
     this.groupService.addNewMemberToGroup(memberEmail, this.group!).subscribe(
-      res => this.snackBar.open(`Successfully added member with email '${memberEmail}'.`, undefined, {
+      () => this.snackBar.open(`Successfully added member with email '${memberEmail}'.`, undefined, {
         duration: 3000,
         panelClass: ['mat-toolbar', 'mat-primary']
       })
@@ -54,9 +54,13 @@ export class GroupOverviewContainerComponent {
     })
   }
 
-  onListTransactions(params: { group: Group, payer: string }) {
+  onListTransactions(params: { group: Group, payer: string }): void {
     this.router.navigate(['groups', params.group.id, 'transactions'], {
       queryParams: {payer: params.payer}
     });
+  }
+
+  onOpenSettings(group: Group): void {
+    this.router.navigate(['groups', group.id, 'settings']);
   }
 }

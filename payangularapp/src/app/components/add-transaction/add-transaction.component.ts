@@ -4,6 +4,7 @@ import {Group} from 'src/app/model/group';
 import {TransactionCreationData} from 'src/app/model/transaction';
 import {MatDialog} from "@angular/material/dialog";
 import {AddParticipantDialogComponent} from "../add-participant-dialog/add-participant-dialog.component";
+import {TransactionInitialCreationData} from "../add-transaction-container/add-transaction-container.component";
 
 @Component({
   selector: 'app-add-transaction',
@@ -13,7 +14,7 @@ import {AddParticipantDialogComponent} from "../add-participant-dialog/add-parti
 export class AddTransactionComponent implements OnInit {
   @Input() group!: Group;
   @Input() participants!: string[];
-  @Input() prefilledTransaction: TransactionCreationData | undefined;
+  @Input() prefilledTransaction: TransactionInitialCreationData | undefined;
   @Output() addTransaction = new EventEmitter<TransactionCreationData>();
   @Output() cancel = new EventEmitter<unknown>();
 
@@ -27,7 +28,7 @@ export class AddTransactionComponent implements OnInit {
       title: [this.prefilledTransaction?.comment, [Validators.required]],
       amount: [this.prefilledTransaction?.amount, [Validators.required]],
       payer: [this.prefilledTransaction?.payer, [Validators.required]],
-      involvedCheckboxes: this.formBuilder.array(this.participants.map(p => this.prefilledTransaction?.involved.includes(p)))
+      involvedCheckboxes: this.formBuilder.array(this.participants.map(p => this.prefilledTransaction?.involved?.includes(p)))
     });
   }
 
@@ -35,7 +36,11 @@ export class AddTransactionComponent implements OnInit {
     return (this.form?.get('involvedCheckboxes') as FormArray).controls as FormControl[];
   }
 
-  get hasNoSelectedParticipants(): boolean {
+  formInvalid(): boolean {
+    return !this.form?.valid || this.hasNoSelectedParticipants();
+  }
+
+  private hasNoSelectedParticipants(): boolean {
     if (!this.form) {
       return true;
     }

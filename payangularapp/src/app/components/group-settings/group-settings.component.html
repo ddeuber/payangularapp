@@ -1,0 +1,22 @@
+<h3>Settings: {{group.name}}</h3>
+
+<div>
+  <mat-form-field>
+    <mat-label>Default payer</mat-label>
+    <mat-select [(ngModel)]="groupSettings.defaultPayer">
+      <mat-option>No selection</mat-option>
+      <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field>
+    <mat-label>Default involved</mat-label>
+    <mat-select [(ngModel)]="groupSettings.defaultInvolved" multiple>
+      <mat-option *ngFor="let p of participants" [value]="p">{{p}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<button mat-raised-button (click)="onSave()" color="primary">Save</button>
