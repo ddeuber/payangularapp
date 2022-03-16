@@ -50,8 +50,12 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
 import { TransactionDetailsContainerComponent } from './components/transaction-details-container/transaction-details-container.component';
 import { GroupSettingsContainerComponent } from './components/group-settings-container/group-settings-container.component';
 import { GroupSettingsComponent } from './components/group-settings/group-settings.component';
+import { StandingOrderDetailsContainerComponent } from './components/standing-order-details-container/standing-order-details-container.component';
+import { StandingOrderDetailsComponent } from './components/standing-order-details/standing-order-details.component';
+import { DeleteStandingOrderDialogComponent } from './components/delete-standing-order-dialog/delete-standing-order-dialog.component';
 
 registerLocaleData(localeDe);
+// TODO: import swiss locale (or general?), also make timezone more general
 
 @NgModule({
   declarations: [
@@ -79,6 +83,9 @@ registerLocaleData(localeDe);
     TransactionDetailsContainerComponent,
     GroupSettingsContainerComponent,
     GroupSettingsComponent,
+    StandingOrderDetailsContainerComponent,
+    StandingOrderDetailsComponent,
+    DeleteStandingOrderDialogComponent,
   ],
     imports: [
         FormsModule,

@@ -5,7 +5,7 @@ import {Group} from "../../model/group";
 @Component({
   selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
-  styleUrls: ['./transaction-details.component.css']
+  styleUrls: ['./transaction-details.component.css', '../../styles/payapp.detailstable.css']
 })
 export class TransactionDetailsComponent {
   @Input() transaction!: Transaction;

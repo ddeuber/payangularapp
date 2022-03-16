@@ -63,4 +63,10 @@ export class GroupOverviewContainerComponent {
   onOpenSettings(group: Group): void {
     this.router.navigate(['groups', group.id, 'settings']);
   }
+
+  openStandingOrderDetails(params: {standingOrder: StandingOrder, group: Group}) {
+    this.router.navigate(['groups', params.group.id, 'standingOrder'], {
+      state: params.standingOrder
+    })
+  }
 }

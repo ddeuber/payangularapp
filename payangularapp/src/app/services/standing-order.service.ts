@@ -13,6 +13,10 @@ export class StandingOrderService {
   constructor(private http: HttpClient) { }
 
   loadStandingOrders(group: Group): Observable<StandingOrder[]> {
-    return this.http.get<StandingOrder[]>(environment.baseUrl + '/standingorders/' + group.id, {});
+    return this.http.get<StandingOrder[]>(environment.baseUrl + '/standingorders/' + group.id);
+  }
+
+  deleteStandingOrder(standingOrder: StandingOrder, group: Group): Observable<unknown> {
+    return this.http.delete<unknown>(environment.baseUrl + '/standingorders/' + group.id + '/' + standingOrder.id);
   }
 }

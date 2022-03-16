@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Transaction} from "../../model/transaction";
 import {Group} from "../../model/group";
@@ -24,7 +24,7 @@ export class TransactionDetailsContainerComponent {
     );
   }
 
-  openDialogWithRevertedTransaction(transactionToRevert: {group: Group, transaction: Transaction}): void {
+  openDialogWithRevertedTransaction(transactionToRevert: { group: Group, transaction: Transaction }): void {
     this.dialog.open(AddTransactionContainerComponent, {
       width: '500px',
       data: {

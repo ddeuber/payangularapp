@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { StandingOrder } from 'src/app/model/standingorder';
 
 @Component({
@@ -10,5 +10,10 @@ export class StandingOrderTableComponent {
   displayedColumns: string[] = ['payer', 'amount', 'title', 'nextExecution'];
   @Input() standingOrders! : StandingOrder[];
 
-  constructor() { }
+  @Output() clickRow = new EventEmitter<StandingOrder>();
+
+  onClickRow(standingOrder: StandingOrder): void {
+    this.clickRow.emit(standingOrder);
+  }
+
 }

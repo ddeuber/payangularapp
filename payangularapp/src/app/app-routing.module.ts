@@ -12,6 +12,9 @@ import {
 import {
   GroupSettingsContainerComponent
 } from "./components/group-settings-container/group-settings-container.component";
+import {
+  StandingOrderDetailsContainerComponent
+} from "./components/standing-order-details-container/standing-order-details-container.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginContainerComponent},
@@ -20,7 +23,8 @@ const routes: Routes = [
   { path: 'groups/:id', component: GroupOverviewContainerComponent},
   { path: 'groups/:id/transactions', component: TransactionListContainerComponent},
   { path: 'groups/:id/transaction', component: TransactionDetailsContainerComponent},
-  { path: 'groups/:id/settings', component: GroupSettingsContainerComponent}
+  { path: 'groups/:id/settings', component: GroupSettingsContainerComponent},
+  { path: 'groups/:id/standingOrder', component: StandingOrderDetailsContainerComponent}
 ];
 
 @NgModule({

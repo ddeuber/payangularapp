@@ -1,0 +1,56 @@
+<h2>Standing Order Details</h2>
+
+<table>
+  <tr>
+    <td>Title</td>
+    <td>{{standingOrder.comment}}</td>
+  </tr>
+  <tr>
+    <td>Amount</td>
+    <td>{{standingOrder.amount}}</td>
+  </tr>
+  <tr>
+    <td>Creator</td>
+    <td>{{standingOrder.creator}}</td>
+  </tr>
+  <tr>
+    <td>Creation date</td>
+    <td>{{standingOrder.timestamp | date: 'dd.MM.yyyy': 'UTC+1'}}</td>
+  </tr>
+  <tr>
+    <td>Creation time</td>
+    <td>{{standingOrder.timestamp | date: 'HH:mm': 'UTC+1'}}</td>
+  </tr>
+  <tr>
+    <td>Periodicity</td>
+    <td>{{standingOrder.periodicity}}</td>
+  </tr>
+  <tr>
+    <td>Last executions</td>
+    <td>{{standingOrder.last_execution_timestamp | date: 'dd.MM.yyyy': 'UTC+1'}}</td>
+  </tr>
+  <tr>
+    <td>Next executions</td>
+    <td>
+      <div *ngFor="let nextExecutionTimestamp of standingOrder.next_executions">
+        {{nextExecutionTimestamp | date: 'dd.MM.yyyy': 'UTC+1'}}
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Payer</td>
+    <td>{{standingOrder.payer}}</td>
+  </tr>
+  <tr>
+    <td>Involved</td>
+    <td>
+      <ul>
+        <li *ngFor="let inv of standingOrder.involved">{{inv}}</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<div>
+  <button mat-raised-button color="primary" (click)="onDeleteStandingOrder()">Delete standing order</button>
+</div>

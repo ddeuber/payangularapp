@@ -1,5 +1,6 @@
 export interface StandingOrder {
   id: number;
+  payer: string;
   creator: string;
   amount: number;
   comment: string;

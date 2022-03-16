@@ -25,7 +25,8 @@
     </mat-menu>
   </div>
 </div>
+
 <app-balance-table [balances]="balances" (clickRow)="onClickBalance($event)"></app-balance-table>
 
-<app-standing-order-table [standingOrders]="standingOrders"></app-standing-order-table>
+<app-standing-order-table [standingOrders]="standingOrders" (clickRow)="onClickStandingOrder($event)"></app-standing-order-table>
 
