@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Group } from '../model/group';
-import { StandingOrder } from '../model/standingorder';
+import {StandingOrder, StandingOrderCreationData} from '../model/standingorder';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,9 @@ export class StandingOrderService {
 
   deleteStandingOrder(standingOrder: StandingOrder, group: Group): Observable<unknown> {
     return this.http.delete<unknown>(environment.baseUrl + '/standingorders/' + group.id + '/' + standingOrder.id);
+  }
+
+  addStandingOrder(standingOrder: StandingOrderCreationData, group: Group): Observable<StandingOrder> {
+    return this.http.post<StandingOrder>(environment.baseUrl + '/standingorders/' + group.id, standingOrder);
   }
 }

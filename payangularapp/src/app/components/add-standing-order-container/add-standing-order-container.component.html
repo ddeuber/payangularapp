@@ -1,0 +1,12 @@
+<ng-container *ngIf="participants$ | async as participants; else loading">
+  <app-add-standing-order
+    [participants]="participants"
+    [group]="group"
+    (cancel)="dialogRef.close()"
+    (addStandingOrder)="addStandingOrder($event)">
+  </app-add-standing-order>
+</ng-container>
+
+<ng-template #loading>
+  <app-top-level-spinner></app-top-level-spinner>
+</ng-template>

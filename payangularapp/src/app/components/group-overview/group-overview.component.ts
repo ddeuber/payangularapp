@@ -22,6 +22,7 @@ export class GroupOverviewComponent {
   @Output() listTransactions = new EventEmitter<{ group: Group, payer: string }>();
   @Output() openSettings = new EventEmitter<Group>();
   @Output() showStandingOrder = new EventEmitter<{ standingOrder: StandingOrder, group: Group }>();
+  @Output() addStandingOrder = new EventEmitter<Group>();
 
   constructor(private dialog: MatDialog) {
   }
@@ -54,6 +55,10 @@ export class GroupOverviewComponent {
 
   onClickStandingOrder(standingOrder: StandingOrder) {
     this.showStandingOrder.emit({standingOrder: standingOrder, group: this.group});
+  }
+
+  onAddStandingOrder() {
+    this.addStandingOrder.emit(this.group);
   }
 
   onOpenSettings(): void {

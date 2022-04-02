@@ -11,6 +11,9 @@ import {GroupService} from 'src/app/services/group.service';
 import {StandingOrderService} from 'src/app/services/standing-order.service';
 import {MatDialog} from "@angular/material/dialog";
 import {AddTransactionContainerComponent} from "../add-transaction-container/add-transaction-container.component";
+import {
+  AddStandingOrderContainerComponent
+} from "../add-standing-order-container/add-standing-order-container.component";
 
 @Component({
   selector: 'app-group-overview-container',
@@ -50,7 +53,14 @@ export class GroupOverviewContainerComponent {
   onAddTransaction(group: Group): void {
     this.dialog.open(AddTransactionContainerComponent, {
       width: '500px',
-      data: {group: group},
+      data: {group: group}
+    })
+  }
+
+  onAddStandingOrder(group: Group): void {
+    this.dialog.open(AddStandingOrderContainerComponent, {
+      width: '500px',
+      data: {group: group}
     })
   }
 

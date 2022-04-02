@@ -1,0 +1,17 @@
+.full-width-input {
+  width: 400px;
+  max-width: 70vw;
+}
+
+.small-top-margin {
+  margin-top: 5%;
+}
+
+.very-small-top-margin {
+  margin-top: 2%;
+}
+
+.small-left-margin {
+  margin-left: 30px;
+}
+

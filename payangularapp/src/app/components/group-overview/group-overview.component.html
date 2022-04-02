@@ -28,5 +28,9 @@
 
 <app-balance-table [balances]="balances" (clickRow)="onClickBalance($event)"></app-balance-table>
 
+<div class="standing-order-header">
+  <h3>Standing Orders</h3>
+  <mat-icon class="action-icon" (click)="onAddStandingOrder()">add_circle</mat-icon>
+</div>
 <app-standing-order-table [standingOrders]="standingOrders" (clickRow)="onClickStandingOrder($event)"></app-standing-order-table>
 

@@ -53,9 +53,11 @@ import { GroupSettingsComponent } from './components/group-settings/group-settin
 import { StandingOrderDetailsContainerComponent } from './components/standing-order-details-container/standing-order-details-container.component';
 import { StandingOrderDetailsComponent } from './components/standing-order-details/standing-order-details.component';
 import { DeleteStandingOrderDialogComponent } from './components/delete-standing-order-dialog/delete-standing-order-dialog.component';
+import { AddStandingOrderContainerComponent } from './components/add-standing-order-container/add-standing-order-container.component';
+import { AddStandingOrderComponent } from './components/add-standing-order/add-standing-order.component';
 
 registerLocaleData(localeDe);
-// TODO: import swiss locale (or general?), also make timezone more general
+// TODO: import swiss locale (or general?), also make timezone more general -> summertime is not used
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ registerLocaleData(localeDe);
     StandingOrderDetailsContainerComponent,
     StandingOrderDetailsComponent,
     DeleteStandingOrderDialogComponent,
+    AddStandingOrderContainerComponent,
+    AddStandingOrderComponent,
   ],
     imports: [
         FormsModule,
