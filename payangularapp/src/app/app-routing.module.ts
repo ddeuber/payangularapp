@@ -15,9 +15,19 @@ import {
 import {
   StandingOrderDetailsContainerComponent
 } from "./components/standing-order-details-container/standing-order-details-container.component";
+import {SignUpContainerComponent} from "./components/sign-up-container/sign-up-container.component";
+import {
+  ForgotPasswordContainerComponent
+} from "./components/forgot-password-container/forgot-password-container.component";
+import {
+  ResetPasswordContainerComponent
+} from "./components/reset-password-container/reset-password-container.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginContainerComponent},
+  { path: 'signup', component: SignUpContainerComponent},
+  { path: 'forgotpassword', component: ForgotPasswordContainerComponent},
+  { path: 'resetpassword', component: ResetPasswordContainerComponent},
   { path: '', redirectTo: 'groups', pathMatch: 'full'},
   { path: 'groups', component: GroupListContainerComponent},
   { path: 'groups/:id', component: GroupOverviewContainerComponent},

@@ -1,9 +1,9 @@
 <div class="authentication-card">
   <mat-card>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>Sign up</mat-card-title>
 
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
+      <form [formGroup]="form" (ngSubmit)="signUp()" autocomplete="off">
         <div>
           <mat-form-field class="full-width-input">
             <mat-label>Email</mat-label>
@@ -19,21 +19,18 @@
         </div>
 
         <div>
-          <mat-error *ngIf="loginInvalid">
-            Incorrect username or password!
+          <mat-error *ngIf="signUpInvalid">
+            Email is already registered.
           </mat-error>
         </div>
 
         <div class="small-top-margin">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Sign up</button>
         </div>
       </form>
 
       <div class="small-top-margin">
-        Don't have an account? <a routerLink="/signup">Sign up</a>
-      </div>
-      <div class="small-top-margin">
-        <a routerLink="/forgotpassword">Forgot password?</a>
+        Already have an account? <a routerLink="/login">Login</a>
       </div>
     </mat-card-content>
   </mat-card>

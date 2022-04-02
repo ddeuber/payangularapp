@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
 import * as moment from 'moment';
-import { TokenService } from './token.service';
-import { Credentials } from '../model/credentials';
+import {TokenService} from './token.service';
+import {Credentials} from '../model/credentials';
 
 interface JwtTokens {
   access_token: string;
@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials): Observable<JwtTokens> {
-    return this.http.post<JwtTokens>(environment.baseUrl + '/login', { 'email': credentials.email, 'password': credentials.password })
+    return this.http.post<JwtTokens>(environment.baseUrl + '/login', credentials)
       .pipe(
         tap((tokens: JwtTokens) => this.setSession(tokens))
       );
@@ -89,7 +89,7 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + refreshToken);
 
-    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', {}, { headers: headers })
+    return this.http.post<AccessToken>(environment.baseUrl + '/refresh', {}, {headers: headers})
       .pipe(
         tap((token: AccessToken) => {
           const jwtTokens: JwtTokens = {
@@ -99,5 +99,19 @@ export class AuthService {
           this.setSession(jwtTokens);
         })
       );
+  }
+
+  signUp(credentials: Credentials): Observable<unknown> {
+    return this.http.post<unknown>(environment.baseUrl + '/signup', credentials)
+  }
+
+  forgotPassword(email: string): Observable<unknown> {
+    return this.http.post<unknown>(environment.baseUrl + '/forgotpassword', {email});
+  }
+
+  resetPassword(newPassword: string, accessToken: string): Observable<unknown> {
+    let authHeaders = new HttpHeaders();
+    authHeaders = authHeaders.set(AuthService.TOKEN_HEADER_KEY, 'Bearer ' + accessToken);
+    return this.http.post<unknown>(environment.baseUrl + '/resetpassword', {password: newPassword}, {headers: authHeaders});
   }
 }

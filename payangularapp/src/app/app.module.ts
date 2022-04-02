@@ -55,9 +55,16 @@ import { StandingOrderDetailsComponent } from './components/standing-order-detai
 import { DeleteStandingOrderDialogComponent } from './components/delete-standing-order-dialog/delete-standing-order-dialog.component';
 import { AddStandingOrderContainerComponent } from './components/add-standing-order-container/add-standing-order-container.component';
 import { AddStandingOrderComponent } from './components/add-standing-order/add-standing-order.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignUpContainerComponent } from './components/sign-up-container/sign-up-container.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotPasswordContainerComponent } from './components/forgot-password-container/forgot-password-container.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetPasswordContainerComponent } from './components/reset-password-container/reset-password-container.component';
 
 registerLocaleData(localeDe);
 // TODO: import swiss locale (or general?), also make timezone more general -> summertime is not used
+// TODO: extract matSnackBar into own component to reduce code duplication
 
 @NgModule({
   declarations: [
@@ -90,6 +97,12 @@ registerLocaleData(localeDe);
     DeleteStandingOrderDialogComponent,
     AddStandingOrderContainerComponent,
     AddStandingOrderComponent,
+    SignUpComponent,
+    SignUpContainerComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordContainerComponent,
+    ResetPasswordComponent,
+    ResetPasswordContainerComponent,
   ],
     imports: [
         FormsModule,
