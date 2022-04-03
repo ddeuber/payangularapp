@@ -1,8 +1,0 @@
-<h2 mat-title>Groups</h2>
-
-<button mat-raised-button color="primary" style="margin-bottom: 5%" (click)="onCreateGroup()">Create Group</button>
-
-<mat-nav-list>
-  <app-group-item *ngFor="let group of groups" [group]=group (groupSelection)="onGroupSelected($event)"></app-group-item>
-</mat-nav-list>
-<mat-divider></mat-divider>
