@@ -22,9 +22,11 @@ import {
 import {
   ResetPasswordContainerComponent
 } from "./components/reset-password-container/reset-password-container.component";
+import {LogoutComponent} from "./components/logout/logout.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginContainerComponent},
+  { path: 'logout', component: LogoutComponent},
   { path: 'signup', component: SignUpContainerComponent},
   { path: 'forgotpassword', component: ForgotPasswordContainerComponent},
   { path: 'resetpassword', component: ResetPasswordContainerComponent},

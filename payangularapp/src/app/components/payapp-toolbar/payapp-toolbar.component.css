@@ -1,0 +1,12 @@
+.nav-link:hover {
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.minor-nav-link {
+  font-size: 0.8em;
+  margin-left: 20px;
+}

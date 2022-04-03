@@ -61,6 +61,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ForgotPasswordContainerComponent } from './components/forgot-password-container/forgot-password-container.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordContainerComponent } from './components/reset-password-container/reset-password-container.component';
+import { PayappToolbarComponent } from './components/payapp-toolbar/payapp-toolbar.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 registerLocaleData(localeDe);
 // TODO: import swiss locale (or general?), also make timezone more general -> summertime is not used
@@ -103,6 +105,8 @@ registerLocaleData(localeDe);
     ForgotPasswordContainerComponent,
     ResetPasswordComponent,
     ResetPasswordContainerComponent,
+    PayappToolbarComponent,
+    LogoutComponent,
   ],
     imports: [
         FormsModule,
