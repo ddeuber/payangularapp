@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-  <span class="nav-link" routerLink="/">Payapp</span>
+  <span class="nav-link vimium-button" routerLink="/">Payapp</span>
   <span class="spacer"></span>
-  <span *ngIf="isLoggedIn(); else login" class="nav-link minor-nav-link" routerLink="/logout">Logout</span>
+  <span *ngIf="isLoggedIn(); else login" class="nav-link minor-nav-link vimium-button" routerLink="/logout">Logout</span>
   <ng-template #login>
-    <span class="nav-link minor-nav-link" routerLink="/login">Login</span>
+    <span class="nav-link minor-nav-link vimium-button" routerLink="/login">Login</span>
   </ng-template>
 </mat-toolbar>
