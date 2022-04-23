@@ -65,7 +65,6 @@ import { PayappToolbarComponent } from './components/util/payapp-toolbar/payapp-
 import { LogoutComponent } from './components/authentication/logout/logout.component';
 
 registerLocaleData(localeDe);
-// TODO: import swiss locale (or general?), also make timezone more general -> summertime is not used
 // TODO: extract matSnackBar into own component to reduce code duplication
 
 @NgModule({
