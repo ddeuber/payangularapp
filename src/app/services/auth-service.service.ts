@@ -3,9 +3,9 @@ import {HttpBackend, HttpClient, HttpHeaders} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import * as moment from 'moment';
 import {TokenService} from './token.service';
 import {Credentials} from '../model/credentials';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 interface JwtTokens {
   access_token: string;
@@ -21,16 +21,15 @@ interface AccessToken {
 })
 export class AuthService {
 
-  private static readonly ACCESS_TOKEN_VALID_MINUTES = 5;
-  private static readonly REFRESH_TOKEN_VALID_DAYS = 29;
-
   static readonly TOKEN_HEADER_KEY = 'Authorization'; // for JWT
 
   private http: HttpClient;
+  private jwtHelper: JwtHelperService;
 
   constructor(private httpBackend: HttpBackend, private tokenService: TokenService) {
     // We use the client from the backend in order to bypass the AuthInterceptor.
     this.http = new HttpClient(httpBackend);
+    this.jwtHelper = new JwtHelperService();
   }
 
   login(credentials: Credentials): Observable<JwtTokens> {
@@ -41,13 +40,8 @@ export class AuthService {
   }
 
   private setSession(tokens: JwtTokens): void {
-    const accessTokenExpiresAt = moment().add(AuthService.ACCESS_TOKEN_VALID_MINUTES, 'minute');
-    const refreshTokenExpiresAt = moment().add(AuthService.REFRESH_TOKEN_VALID_DAYS, 'day');
-
     this.tokenService.setAccessToken(tokens.access_token);
     this.tokenService.setRefreshToken(tokens.refresh_token);
-    this.tokenService.setAccessTokenExpiration(accessTokenExpiresAt);
-    this.tokenService.setRefreshTokenExpiration(refreshTokenExpiresAt);
   }
 
   logout(): void {
@@ -55,12 +49,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const accessTokenExpiration = this.tokenService.getAccessTokenExpiration();
-    if (!accessTokenExpiration) {
+    const accessToken = this.tokenService.getAccessToken();
+    if (!accessToken) {
       return false;
     }
 
-    return moment().isBefore(accessTokenExpiration);
+    return !this.jwtHelper.isTokenExpired(accessToken);
   }
 
   isLoggedOut(): boolean {
@@ -72,12 +66,12 @@ export class AuthService {
   }
 
   isRefreshPossible(): boolean {
-    const refreshTokenExpiration = this.tokenService.getRefreshTokenExpiration();
-    if (!refreshTokenExpiration) {
+    const refreshToken = this.tokenService.getRefreshToken();
+    if (!refreshToken) {
       return false;
     }
 
-    return moment().isBefore(refreshTokenExpiration);
+    return !this.jwtHelper.isTokenExpired(refreshToken);
   }
 
   refresh(): Observable<AccessToken> {
