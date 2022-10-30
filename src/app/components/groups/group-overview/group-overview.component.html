@@ -4,22 +4,22 @@
   </div>
 
   <div>
-    <mat-icon class="action-icon vimium-button" (click)="onAddTransaction()" matTooltip="Add transaction">add_shopping_cart</mat-icon>
+    <mat-icon class="action-icon vimium-button" (click)="onAddTransaction()" matTooltip="Add transaction" svgIcon="add_shopping_cart"></mat-icon>
 
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon svgIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button (click)="onOpenSettings()" mat-menu-item>
-        <mat-icon>settings</mat-icon>
+        <mat-icon svgIcon="settings"></mat-icon>
         <span>Settings</span>
       </button>
       <button (click)="onAddMember()" mat-menu-item>
-        <mat-icon>group_add</mat-icon>
+        <mat-icon svgIcon="group_add"></mat-icon>
         <span>Add member</span>
       </button>
       <button (click)="onLeaveGroup()" mat-menu-item>
-        <mat-icon>delete</mat-icon>
+        <mat-icon svgIcon="delete"></mat-icon>
         <span>Leave group</span>
       </button>
     </mat-menu>
@@ -30,7 +30,7 @@
 
 <div class="standing-order-header">
   <h3>Standing Orders</h3>
-  <mat-icon class="action-icon" (click)="onAddStandingOrder()">add_circle</mat-icon>
+  <mat-icon class="action-icon" (click)="onAddStandingOrder()" svgIcon="add_circle"></mat-icon>
 </div>
 <app-standing-order-table [standingOrders]="standingOrders" (clickRow)="onClickStandingOrder($event)"></app-standing-order-table>
 
