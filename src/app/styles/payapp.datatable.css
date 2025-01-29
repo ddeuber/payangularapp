@@ -1,6 +1,5 @@
 table {
-  max-width: 95vw;
-  width: 800px;
+  width: min(95vw, 800px);
 }
 
 .mat-row:hover {
